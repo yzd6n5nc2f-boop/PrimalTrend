@@ -26,10 +26,20 @@ jobs:
           cache: "pnpm"
       - name: Enable Corepack
         run: corepack enable
+      - name: Prepare pnpm
+        run: corepack prepare pnpm@9.0.0 --activate
+      - name: Check pnpm version
+        run: pnpm -v
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build app
         run: pnpm run build
+      - name: Debug build output
+        run: |
+          ls -la
+          ls -la out || true
+          ls -la dist || true
+          ls -la build || true
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
