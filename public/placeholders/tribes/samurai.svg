@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#0B0D10" />
+  <rect x="60" y="60" width="1080" height="680" fill="#121621" stroke="#1F2430" stroke-width="4" />
+  <text x="50%" y="50%" fill="#FFFFFF" font-family="Arial" font-size="72" letter-spacing="8" text-anchor="middle" dominant-baseline="middle">SAMURAI</text>
+</svg>

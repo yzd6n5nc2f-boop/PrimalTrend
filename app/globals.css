@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #050608;
+  color: #ffffff;
+}
+
+.noise-bg {
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.03), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.02), transparent 40%),
+    radial-gradient(circle at 0% 80%, rgba(255, 255, 255, 0.02), transparent 40%);
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(5, 6, 8, 0.92) 0%,
+    rgba(5, 6, 8, 0.62) 45%,
+    rgba(5, 6, 8, 0.25) 70%,
+    rgba(5, 6, 8, 0.92) 100%
+  );
+}
+
+@layer utilities {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050608];
+  }
+
+  .section-spacing {
+    @apply py-12 md:py-16 lg:py-24;
+  }
+}
