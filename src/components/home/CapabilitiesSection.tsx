@@ -26,14 +26,14 @@ export function CapabilitiesSection() {
         <p className="text-[12px] uppercase tracking-[0.22em] text-[#7D8696]">
           — Capabilities
         </p>
-        <h2 className="mt-4 font-display text-[32px] md:text-[44px]">
+        <h2 className="mt-4 font-display text-[32px] text-white/90 md:text-[44px]">
           Four focused ways we build performance without noise.
         </h2>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {cards.map((card) => (
             <Card key={card.title}>
               <h3 className="font-display text-xl uppercase">{card.title}</h3>
-              <p className="mt-3 text-sm text-[#B8BDC7]">{card.copy}</p>
+              <p className="mt-3 text-sm text-[#A6AEBB]">{card.copy}</p>
             </Card>
           ))}
         </div>
