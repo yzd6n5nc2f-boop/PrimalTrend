@@ -12,22 +12,22 @@ export function Hero() {
         className="object-cover grayscale"
         priority
       />
-      <div className="absolute inset-0 hero-overlay" />
+      <div className="absolute inset-0 hero-overlay noise-bg" />
       <div className="relative mx-auto flex h-full max-w-[1280px] items-center px-4 md:px-6">
         <div className="max-w-[520px]">
-          <p className="text-[12px] uppercase tracking-[0.22em] text-[#7D8696]">
+          <p className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-white/70">
             Performance lineage
           </p>
-          <h1 className="mt-4 font-display text-[42px] leading-[0.92] tracking-[-0.02em] md:text-[64px]">
+          <h1 className="mt-4 font-display text-[42px] leading-[0.96] tracking-[-0.03em] text-white/95 md:text-[64px] md:leading-[0.9] md:tracking-[-0.04em]">
             TRAIN LIKE YOUR
             <br />
             BLOODLINE REMEMBERS
           </h1>
-          <p className="mt-4 text-[15px] text-[#B8BDC7] md:text-[16px]">
+          <p className="mt-4 text-[15px] text-[#A7AFBC] md:text-[16px]">
             Modern ancestral performance wear built for strength, endurance, and
             discipline.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <Link href="/shop">
               <Button>Shop now</Button>
             </Link>

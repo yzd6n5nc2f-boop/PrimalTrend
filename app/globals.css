@@ -22,13 +22,16 @@ body {
 }
 
 .hero-overlay {
-  background: linear-gradient(
-    90deg,
-    rgba(5, 6, 8, 0.92) 0%,
-    rgba(5, 6, 8, 0.62) 45%,
-    rgba(5, 6, 8, 0.25) 70%,
-    rgba(5, 6, 8, 0.92) 100%
-  );
+  background:
+    radial-gradient(60% 55% at 65% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+    radial-gradient(80% 80% at 50% 50%, rgba(5, 6, 8, 0) 45%, rgba(5, 6, 8, 0.85) 100%),
+    linear-gradient(
+      90deg,
+      rgba(5, 6, 8, 0.92) 0%,
+      rgba(5, 6, 8, 0.62) 45%,
+      rgba(5, 6, 8, 0.25) 70%,
+      rgba(5, 6, 8, 0.92) 100%
+    );
 }
 
 @layer utilities {
