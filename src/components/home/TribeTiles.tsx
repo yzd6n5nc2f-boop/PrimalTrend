@@ -1,24 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 
+// Tribe image filenames must be lowercase to match slug (Linux is case-sensitive).
 const tiles = [
   {
     title: "Samurai",
     meta: "Precision. Discipline. Endurance.",
     href: "/collections/samurai",
-    image: "/images/tribes/samurai.jpg"
+    image: "/images/tribes/samurai.png"
   },
   {
     title: "Viking",
     meta: "Strength. Resilience. Fire.",
     href: "/collections/viking",
-    image: "/images/tribes/viking.jpg"
+    image: "/images/tribes/viking.png"
   },
   {
     title: "Maasai",
     meta: "Agility. Speed. Stamina.",
     href: "/collections/maasai",
-    image: "/images/tribes/maasai.jpg"
+    image: "/images/tribes/maasai.png"
   }
 ];
 
