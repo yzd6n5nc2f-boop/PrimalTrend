@@ -16,11 +16,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   if (!product) return notFound();
 
   const gallery = [
-    product.image,
-    "/placeholders/products/p02.svg",
-    "/placeholders/products/p03.svg",
-    "/placeholders/products/p04.svg",
-    "/placeholders/products/p05.svg"
+    `/images/products/${product.id}/main.jpg`,
+    `/images/products/${product.id}/alt-1.jpg`,
+    `/images/products/${product.id}/alt-2.jpg`,
+    `/images/products/${product.id}/alt-3.jpg`
   ];
 
   return (

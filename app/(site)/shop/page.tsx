@@ -25,8 +25,16 @@ export default function ShopPage() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {[
-            { label: "Men", href: "/shop/men" },
-            { label: "Women", href: "/shop/women" }
+            {
+              label: "Men",
+              href: "/shop/men",
+              image: "/images/categories/men.jpg"
+            },
+            {
+              label: "Women",
+              href: "/shop/women",
+              image: "/images/categories/women.jpg"
+            }
           ].map((item) => (
             <Link
               key={item.label}
@@ -34,7 +42,7 @@ export default function ShopPage() {
               className="group relative h-[240px] overflow-hidden rounded-[20px] border border-[#1F2430]"
             >
               <Image
-                src="/placeholders/shop-feature.svg"
+                src={item.image}
                 alt={item.label}
                 fill
                 className="object-cover grayscale transition duration-150 group-hover:scale-[1.03]"

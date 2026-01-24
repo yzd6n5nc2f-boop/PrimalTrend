@@ -6,7 +6,7 @@ export const tribes = [
     description:
       "A relentless collection built for athletes who treat training like a rite of passage.",
     traits: ["Discipline", "Power", "Minimalism"],
-    image: "/placeholders/tribes/spartan.svg"
+    image: "/images/tribes/spartan.jpg"
   },
   {
     slug: "samurai",
@@ -15,7 +15,7 @@ export const tribes = [
     description:
       "Technical silhouettes with exacting details for those who move with calm focus.",
     traits: ["Precision", "Control", "Endurance"],
-    image: "/placeholders/tribes/samurai.svg"
+    image: "/images/tribes/samurai.jpg"
   },
   {
     slug: "viking",
@@ -24,7 +24,7 @@ export const tribes = [
     description:
       "Layered insulation and storm-ready shells built for distance and grit.",
     traits: ["Strength", "Resilience", "Adaptability"],
-    image: "/placeholders/tribes/viking.svg"
+    image: "/images/tribes/viking.jpg"
   },
   {
     slug: "maasai",
@@ -33,7 +33,7 @@ export const tribes = [
     description:
       "Lightweight builds and breathable knitwear made for the long run.",
     traits: ["Stamina", "Agility", "Focus"],
-    image: "/placeholders/tribes/maasai.svg"
+    image: "/images/tribes/maasai.jpg"
   },
   {
     slug: "maori",
@@ -42,7 +42,7 @@ export const tribes = [
     description:
       "Trail-tough constructions and storm-ready protection for the elements.",
     traits: ["Courage", "Balance", "Momentum"],
-    image: "/placeholders/tribes/maori.svg"
+    image: "/images/tribes/maori.jpg"
   },
   {
     slug: "inca",
@@ -51,6 +51,6 @@ export const tribes = [
     description:
       "Layered compression and thermal systems built to sustain long climbs.",
     traits: ["Clarity", "Warmth", "Stability"],
-    image: "/placeholders/tribes/inca.svg"
+    image: "/images/tribes/inca.jpg"
   }
 ];
