@@ -1,3 +1,4 @@
+// Tribe image filenames must be lowercase to match slug (Linux is case-sensitive).
 export const tribes = [
   {
     slug: "spartan",
@@ -6,7 +7,7 @@ export const tribes = [
     description:
       "A relentless collection built for athletes who treat training like a rite of passage.",
     traits: ["Discipline", "Power", "Minimalism"],
-    image: "/images/tribes/spartan.jpg"
+    image: "/images/tribes/spartan.png"
   },
   {
     slug: "samurai",
@@ -15,7 +16,7 @@ export const tribes = [
     description:
       "Technical silhouettes with exacting details for those who move with calm focus.",
     traits: ["Precision", "Control", "Endurance"],
-    image: "/images/tribes/samurai.jpg"
+    image: "/images/tribes/samurai.png"
   },
   {
     slug: "viking",
@@ -24,7 +25,7 @@ export const tribes = [
     description:
       "Layered insulation and storm-ready shells built for distance and grit.",
     traits: ["Strength", "Resilience", "Adaptability"],
-    image: "/images/tribes/viking.jpg"
+    image: "/images/tribes/viking.png"
   },
   {
     slug: "maasai",
@@ -33,7 +34,7 @@ export const tribes = [
     description:
       "Lightweight builds and breathable knitwear made for the long run.",
     traits: ["Stamina", "Agility", "Focus"],
-    image: "/images/tribes/maasai.jpg"
+    image: "/images/tribes/maasai.png"
   },
   {
     slug: "maori",
@@ -42,7 +43,7 @@ export const tribes = [
     description:
       "Trail-tough constructions and storm-ready protection for the elements.",
     traits: ["Courage", "Balance", "Momentum"],
-    image: "/images/tribes/maori.jpg"
+    image: "/images/tribes/maori.png"
   },
   {
     slug: "inca",
@@ -51,6 +52,6 @@ export const tribes = [
     description:
       "Layered compression and thermal systems built to sustain long climbs.",
     traits: ["Clarity", "Warmth", "Stability"],
-    image: "/images/tribes/inca.jpg"
+    image: "/images/tribes/inca.png"
   }
 ];
