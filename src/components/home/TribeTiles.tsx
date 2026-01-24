@@ -6,19 +6,19 @@ const tiles = [
     title: "Samurai",
     meta: "Precision. Discipline. Endurance.",
     href: "/collections/samurai",
-    image: "/placeholders/tribes/samurai.svg"
+    image: "/images/tribes/samurai.jpg"
   },
   {
     title: "Viking",
     meta: "Strength. Resilience. Fire.",
     href: "/collections/viking",
-    image: "/placeholders/tribes/viking.svg"
+    image: "/images/tribes/viking.jpg"
   },
   {
     title: "Maasai",
     meta: "Agility. Speed. Stamina.",
     href: "/collections/maasai",
-    image: "/placeholders/tribes/maasai.svg"
+    image: "/images/tribes/maasai.jpg"
   }
 ];
 
