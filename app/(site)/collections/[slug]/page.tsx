@@ -20,12 +20,12 @@ export default function CollectionPage({ params }: { params: { slug: string } })
 
   return (
     <div>
-      <div className="relative h-[320px] overflow-hidden">
+      <div className="relative h-96 overflow-hidden md:h-[420px]">
         <Image
           src={tribe.image}
           alt={tribe.name}
           fill
-          className="object-cover grayscale"
+          className="object-cover object-top grayscale"
         />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-4 md:px-6">
