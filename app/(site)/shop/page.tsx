@@ -30,7 +30,7 @@ export default async function ShopPage() {
               label: "Men",
               href: "/shop/men",
               image: "/images/categories/men.png",
-              position: "object-[50%_28%]"
+              position: "object-[50%_12%]"
             },
             {
               label: "Women",
