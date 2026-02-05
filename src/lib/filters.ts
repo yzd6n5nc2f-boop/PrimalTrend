@@ -4,6 +4,7 @@ export type FilterState = {
   sport: string[];
   tribe: string[];
   size: string[];
+  category: string[];
   min?: number;
   max?: number;
   isNew?: boolean;
@@ -23,6 +24,14 @@ export function applyFilters(products: Product[], filters: FilterState) {
   if (filters.tribe.length > 0) {
     result = result.filter((product) =>
       filters.tribe.some((tribe) => product.tribeTags.includes(tribe))
+    );
+  }
+
+  if (filters.category.length > 0) {
+    result = result.filter((product) =>
+      filters.category.some((category) =>
+        product.categoryTags.includes(category)
+      )
     );
   }
 

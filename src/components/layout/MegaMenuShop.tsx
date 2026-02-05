@@ -3,22 +3,75 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { buildFilterQuery } from "@/lib/queryState";
+import type { FilterState } from "@/lib/filters";
+
+const emptyFilters: FilterState = {
+  sport: [],
+  tribe: [],
+  size: [],
+  category: []
+};
+
+const withFilters = (href: string, filters: Partial<FilterState>) =>
+  `${href}${buildFilterQuery({ ...emptyFilters, ...filters })}`;
 
 const categories = [
   {
     title: "Men",
-    links: ["Tops", "Bottoms", "Outerwear", "Accessories"],
-    href: "/shop/men"
+    href: "/shop/men",
+    links: [
+      { label: "Tops", href: withFilters("/shop/men", { category: ["tops"] }) },
+      {
+        label: "Bottoms",
+        href: withFilters("/shop/men", { category: ["bottoms"] })
+      },
+      {
+        label: "Outerwear",
+        href: withFilters("/shop/men", { category: ["outerwear"] })
+      },
+      {
+        label: "Accessories",
+        href: withFilters("/shop/men", { category: ["accessories"] })
+      }
+    ]
   },
   {
     title: "Women",
-    links: ["Tops", "Leggings", "Shorts", "Accessories"],
-    href: "/shop/women"
+    href: "/shop/women",
+    links: [
+      { label: "Tops", href: withFilters("/shop/women", { category: ["tops"] }) },
+      {
+        label: "Leggings",
+        href: withFilters("/shop/women", { category: ["leggings"] })
+      },
+      {
+        label: "Shorts",
+        href: withFilters("/shop/women", { category: ["shorts"] })
+      },
+      {
+        label: "Accessories",
+        href: withFilters("/shop/women", { category: ["accessories"] })
+      }
+    ]
   },
   {
     title: "Sports",
-    links: ["Gym", "Running", "Cycling", "Triathlon", "Swimming", "Trail"],
-    href: "/shop"
+    href: "/shop",
+    links: [
+      { label: "Gym", href: withFilters("/shop", { sport: ["gym"] }) },
+      { label: "Running", href: withFilters("/shop", { sport: ["running"] }) },
+      { label: "Cycling", href: withFilters("/shop", { sport: ["cycling"] }) },
+      {
+        label: "Triathlon",
+        href: withFilters("/shop", { sport: ["triathlon"] })
+      },
+      {
+        label: "Swimming",
+        href: withFilters("/shop", { sport: ["swimming"] })
+      },
+      { label: "Trail", href: withFilters("/shop", { sport: ["trail"] }) }
+    ]
   }
 ];
 
@@ -46,9 +99,13 @@ export function MegaMenuShop() {
                   </Link>
                   <div className="flex flex-col gap-2 text-white/70">
                     {category.links.map((link) => (
-                      <span key={link} className="transition hover:text-white">
-                        {link}
-                      </span>
+                      <Link
+                        key={link.label}
+                        href={link.href}
+                        className="transition hover:text-white"
+                      >
+                        {link.label}
+                      </Link>
                     ))}
                   </div>
                 </div>

@@ -8,6 +8,7 @@ export type Product = {
   sizes: string[];
   sportTags: string[];
   tribeTags: string[];
+  categoryTags: string[];
   isNew: boolean;
   isFeatured: boolean;
 };
@@ -23,6 +24,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["gym", "running"],
     tribeTags: ["spartan", "samurai"],
+    categoryTags: ["tops"],
     isNew: true,
     isFeatured: true
   },
@@ -36,6 +38,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["running", "triathlon"],
     tribeTags: ["maasai"],
+    categoryTags: ["tops"],
     isNew: true,
     isFeatured: false
   },
@@ -49,6 +52,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL", "XXL"],
     sportTags: ["gym", "cycling"],
     tribeTags: ["samurai"],
+    categoryTags: ["tops"],
     isNew: false,
     isFeatured: true
   },
@@ -62,6 +66,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["running", "trail"],
     tribeTags: ["viking"],
+    categoryTags: ["tops"],
     isNew: true,
     isFeatured: true
   },
@@ -75,6 +80,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["gym", "running"],
     tribeTags: ["spartan"],
+    categoryTags: ["bottoms", "shorts"],
     isNew: false,
     isFeatured: true
   },
@@ -88,6 +94,7 @@ export const products: Product[] = [
     sizes: ["M", "L", "XL"],
     sportTags: ["trail", "cycling"],
     tribeTags: ["maori"],
+    categoryTags: ["outerwear"],
     isNew: true,
     isFeatured: true
   },
@@ -101,6 +108,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["trail", "running"],
     tribeTags: ["inca"],
+    categoryTags: ["bottoms", "leggings"],
     isNew: false,
     isFeatured: false
   },
@@ -114,6 +122,7 @@ export const products: Product[] = [
     sizes: ["M", "L", "XL", "XXL"],
     sportTags: ["gym"],
     tribeTags: ["spartan"],
+    categoryTags: ["outerwear"],
     isNew: false,
     isFeatured: true
   },
@@ -127,6 +136,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["running", "triathlon"],
     tribeTags: ["samurai"],
+    categoryTags: ["bottoms", "leggings"],
     isNew: true,
     isFeatured: false
   },
@@ -140,6 +150,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L"],
     sportTags: ["cycling"],
     tribeTags: ["viking"],
+    categoryTags: ["bottoms"],
     isNew: false,
     isFeatured: false
   },
@@ -153,6 +164,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["running"],
     tribeTags: ["maasai"],
+    categoryTags: ["bottoms", "shorts"],
     isNew: true,
     isFeatured: true
   },
@@ -166,6 +178,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L"],
     sportTags: ["swimming", "triathlon"],
     tribeTags: ["maori"],
+    categoryTags: ["bottoms"],
     isNew: false,
     isFeatured: false
   },
@@ -179,6 +192,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["trail", "running"],
     tribeTags: ["inca"],
+    categoryTags: ["tops"],
     isNew: false,
     isFeatured: false
   },
@@ -192,6 +206,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["gym"],
     tribeTags: ["spartan"],
+    categoryTags: ["tops"],
     isNew: false,
     isFeatured: true
   },
@@ -205,6 +220,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L"],
     sportTags: ["cycling"],
     tribeTags: ["samurai"],
+    categoryTags: ["tops"],
     isNew: true,
     isFeatured: false
   },
@@ -218,6 +234,7 @@ export const products: Product[] = [
     sizes: ["M", "L", "XL"],
     sportTags: ["trail"],
     tribeTags: ["viking"],
+    categoryTags: ["outerwear"],
     isNew: false,
     isFeatured: true
   },
@@ -231,6 +248,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L", "XL"],
     sportTags: ["gym", "running"],
     tribeTags: ["maasai"],
+    categoryTags: ["tops"],
     isNew: true,
     isFeatured: false
   },
@@ -244,6 +262,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["gym", "running"],
     tribeTags: ["maori"],
+    categoryTags: ["tops"],
     isNew: true,
     isFeatured: true
   },
@@ -257,6 +276,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["trail"],
     tribeTags: ["inca"],
+    categoryTags: ["outerwear"],
     isNew: false,
     isFeatured: true
   },
@@ -270,6 +290,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL", "XXL"],
     sportTags: ["gym"],
     tribeTags: ["spartan"],
+    categoryTags: ["bottoms"],
     isNew: false,
     isFeatured: false
   },
@@ -283,6 +304,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["gym", "running"],
     tribeTags: ["samurai"],
+    categoryTags: ["tops"],
     isNew: false,
     isFeatured: false
   },
@@ -296,6 +318,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["running", "trail"],
     tribeTags: ["viking"],
+    categoryTags: ["bottoms", "leggings"],
     isNew: true,
     isFeatured: false
   },
@@ -309,6 +332,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["running", "gym"],
     tribeTags: ["maasai"],
+    categoryTags: ["tops"],
     isNew: false,
     isFeatured: true
   },
@@ -322,6 +346,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["swimming", "triathlon"],
     tribeTags: ["maori"],
+    categoryTags: ["tops", "bottoms"],
     isNew: true,
     isFeatured: false
   },
@@ -335,6 +360,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["gym", "trail"],
     tribeTags: ["inca"],
+    categoryTags: ["tops"],
     isNew: true,
     isFeatured: true
   },
@@ -348,6 +374,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     sportTags: ["gym", "running"],
     tribeTags: ["spartan"],
+    categoryTags: ["tops"],
     isNew: false,
     isFeatured: false
   },
@@ -361,6 +388,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L"],
     sportTags: ["running", "gym"],
     tribeTags: ["samurai"],
+    categoryTags: ["bottoms", "shorts"],
     isNew: false,
     isFeatured: true
   },
@@ -374,6 +402,7 @@ export const products: Product[] = [
     sizes: ["M", "L", "XL", "XXL"],
     sportTags: ["gym"],
     tribeTags: ["viking"],
+    categoryTags: ["outerwear"],
     isNew: false,
     isFeatured: false
   },
@@ -387,6 +416,7 @@ export const products: Product[] = [
     sizes: ["XS", "S", "M", "L"],
     sportTags: ["triathlon", "running"],
     tribeTags: ["maasai"],
+    categoryTags: ["bottoms", "leggings"],
     isNew: true,
     isFeatured: false
   },
@@ -400,6 +430,7 @@ export const products: Product[] = [
     sizes: ["M"],
     sportTags: ["swimming"],
     tribeTags: ["maori"],
+    categoryTags: ["accessories"],
     isNew: false,
     isFeatured: false
   }

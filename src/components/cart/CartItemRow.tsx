@@ -36,7 +36,14 @@ export function CartItemRow({ item }: { item: CartItem }) {
           +
         </button>
       </div>
-      <div className="text-sm text-white">{formatPrice(item.price)}</div>
+      <div className="text-right">
+        <p className="text-sm text-white">
+          {formatPrice(item.price * item.qty)}
+        </p>
+        <p className="text-xs text-white/50">
+          {formatPrice(item.price)} each
+        </p>
+      </div>
       <button
         className="text-xs uppercase tracking-[0.18em] text-white/50"
         onClick={() => removeItem(item.productId, item.size)}

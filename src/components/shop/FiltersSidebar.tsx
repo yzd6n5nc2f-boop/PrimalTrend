@@ -1,7 +1,7 @@
 "use client";
 
 import { FilterState } from "@/lib/filters";
-import { sports, sizes } from "@/data/categories";
+import { apparelCategories, sports, sizes } from "@/data/categories";
 import { tribes } from "@/data/tribes";
 import { Input } from "@/components/ui/Input";
 
@@ -22,6 +22,14 @@ export function FiltersSidebar({
         items={sports}
         selected={filters.sport}
         onToggle={(value) => onChange({ ...filters, sport: toggleValue(filters.sport, value) })}
+      />
+      <FilterGroup
+        title="Category"
+        items={apparelCategories}
+        selected={filters.category}
+        onToggle={(value) =>
+          onChange({ ...filters, category: toggleValue(filters.category, value) })
+        }
       />
       <FilterGroup
         title="Tribe"

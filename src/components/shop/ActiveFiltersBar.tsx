@@ -11,6 +11,7 @@ export function ActiveFiltersBar({
 }) {
   const chips = [
     ...filters.sport.map((value) => `Sport: ${value}`),
+    ...filters.category.map((value) => `Category: ${value}`),
     ...filters.tribe.map((value) => `Tribe: ${value}`),
     ...filters.size.map((value) => `Size: ${value}`)
   ];

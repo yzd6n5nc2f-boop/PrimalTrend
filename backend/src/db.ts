@@ -16,6 +16,7 @@ type ProductRow = {
   sizes: string;
   sport_tags: string;
   tribe_tags: string;
+  category_tags: string;
   is_new: number;
   is_featured: number;
 };
@@ -58,6 +59,7 @@ db.exec(`
     sizes TEXT NOT NULL,
     sport_tags TEXT NOT NULL,
     tribe_tags TEXT NOT NULL,
+    category_tags TEXT NOT NULL DEFAULT '[]',
     is_new INTEGER NOT NULL,
     is_featured INTEGER NOT NULL
   );
@@ -83,6 +85,16 @@ db.exec(`
   );
 `);
 
+const productColumns = db
+  .prepare("PRAGMA table_info(products)")
+  .all() as Array<{ name: string }>;
+const columnNames = new Set(productColumns.map((col) => col.name));
+if (!columnNames.has("category_tags")) {
+  db.exec(
+    "ALTER TABLE products ADD COLUMN category_tags TEXT NOT NULL DEFAULT '[]'"
+  );
+}
+
 const productCount = db
   .prepare("SELECT COUNT(1) as count FROM products")
   .get() as { count: number };
@@ -90,8 +102,8 @@ const productCount = db
 if (productCount.count === 0) {
   const insert = db.prepare(
     `INSERT INTO products
-      (id, slug, name, price, description, image, sizes, sport_tags, tribe_tags, is_new, is_featured)
-      VALUES (@id, @slug, @name, @price, @description, @image, @sizes, @sport_tags, @tribe_tags, @is_new, @is_featured)`
+      (id, slug, name, price, description, image, sizes, sport_tags, tribe_tags, category_tags, is_new, is_featured)
+      VALUES (@id, @slug, @name, @price, @description, @image, @sizes, @sport_tags, @tribe_tags, @category_tags, @is_new, @is_featured)`
   );
 
   const insertMany = db.transaction((items: Product[]) => {
@@ -106,6 +118,7 @@ if (productCount.count === 0) {
         sizes: JSON.stringify(product.sizes),
         sport_tags: JSON.stringify(product.sportTags),
         tribe_tags: JSON.stringify(product.tribeTags),
+        category_tags: JSON.stringify(product.categoryTags),
         is_new: product.isNew ? 1 : 0,
         is_featured: product.isFeatured ? 1 : 0
       });
@@ -114,6 +127,21 @@ if (productCount.count === 0) {
 
   insertMany(products);
 }
+
+const updateCategoryTags = db.prepare(
+  "UPDATE products SET category_tags = @category_tags WHERE id = @id"
+);
+
+const syncCategories = db.transaction((items: Product[]) => {
+  for (const product of items) {
+    updateCategoryTags.run({
+      id: product.id,
+      category_tags: JSON.stringify(product.categoryTags)
+    });
+  }
+});
+
+syncCategories(products);
 
 const mapProduct = (row: ProductRow): Product => ({
   id: row.id,
@@ -125,6 +153,7 @@ const mapProduct = (row: ProductRow): Product => ({
   sizes: JSON.parse(row.sizes),
   sportTags: JSON.parse(row.sport_tags),
   tribeTags: JSON.parse(row.tribe_tags),
+  categoryTags: JSON.parse(row.category_tags ?? "[]"),
   isNew: Boolean(row.is_new),
   isFeatured: Boolean(row.is_featured)
 });

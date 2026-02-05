@@ -57,6 +57,7 @@ export function WomenShopPageClient({ products }: WomenShopPageClientProps) {
             onClear={() =>
               updateFilters({
                 sport: [],
+                category: [],
                 tribe: [],
                 size: [],
                 min: undefined,

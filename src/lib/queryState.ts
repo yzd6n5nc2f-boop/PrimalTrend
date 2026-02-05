@@ -11,6 +11,7 @@ export function parseFilterState(searchParams: URLSearchParams): FilterState {
     sport: getList("sport"),
     tribe: getList("tribe"),
     size: getList("size"),
+    category: getList("category"),
     min: min ? Number(min) : undefined,
     max: max ? Number(max) : undefined,
     isNew: searchParams.get("new") === "true",
@@ -30,6 +31,7 @@ export function buildFilterQuery(filters: FilterState) {
   setList("sport", filters.sport);
   setList("tribe", filters.tribe);
   setList("size", filters.size);
+  setList("category", filters.category);
 
   if (typeof filters.min === "number") {
     params.set("min", String(filters.min));

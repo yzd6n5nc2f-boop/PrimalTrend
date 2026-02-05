@@ -40,7 +40,6 @@ export function Header() {
           <Link className="transition hover:text-white" href="/journal">
             Journal
           </Link>
-          <span className="text-white/40">Athletes</span>
         </nav>
         <Link
           href="/"
