@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { checkoutCart } from "@/lib/cartApi";
 import { useCartStore, useCartTotals } from "@/store/cartStore";
 import { formatPrice } from "@/lib/format";
 import { Button } from "@/components/ui/Button";
@@ -15,6 +16,7 @@ type CartQuote = {
 export function OrderSummary() {
   const totals = useCartTotals();
   const items = useCartStore((state) => state.items);
+  const cartId = useCartStore((state) => state.cartId);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [quote, setQuote] = useState<CartQuote | null>(null);
@@ -91,6 +93,14 @@ export function OrderSummary() {
     setError(null);
 
     try {
+      if (cartId) {
+        const payload = await checkoutCart(cartId);
+        if (payload?.url) {
+          window.location.href = payload.url;
+          return;
+        }
+      }
+
       const response = await fetch(`${apiBase}/api/cart/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

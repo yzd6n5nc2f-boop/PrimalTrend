@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Product } from "@/data/products";
 import { formatPrice } from "@/lib/format";
 import { Badge } from "@/components/ui/Badge";
@@ -9,7 +10,8 @@ import { SizeSelector } from "@/components/product/SizeSelector";
 import { useCartStore } from "@/store/cartStore";
 
 export function ProductInfo({ product }: { product: Product }) {
-  const [size, setSize] = useState<string | undefined>();
+  const router = useRouter();
+  const [size, setSize] = useState<string | undefined>(product.sizes[0]);
   const [message, setMessage] = useState<string | null>(null);
   const addItem = useCartStore((state) => state.addItem);
 
@@ -42,6 +44,7 @@ export function ProductInfo({ product }: { product: Product }) {
           if (size) {
             addItem(product, size);
             setMessage("Added to bag.");
+            router.push("/cart");
           }
         }}
       >
@@ -51,7 +54,7 @@ export function ProductInfo({ product }: { product: Product }) {
         <p className="text-xs uppercase tracking-[0.18em] text-emerald-300">
           {message}
         </p>
-      ) : (
+      ) : size ? null : (
         <p className="text-xs uppercase tracking-[0.18em] text-white/40">
           Select a size to add to bag.
         </p>

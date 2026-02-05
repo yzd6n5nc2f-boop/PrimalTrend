@@ -24,6 +24,13 @@ See `.env.example` for required values.
 - `GET /health`
 - `GET /api/products`
 - `GET /api/products/:slug`
+- `POST /api/cart`
+- `GET /api/cart/:cartId`
+- `POST /api/cart/:cartId/items`
+- `PATCH /api/cart/:cartId/items`
+- `DELETE /api/cart/:cartId/items`
+- `POST /api/cart/:cartId/clear`
+- `POST /api/cart/:cartId/checkout`
 - `POST /api/cart/quote`
 - `POST /api/cart/checkout`
 - `POST /api/stripe/webhook`

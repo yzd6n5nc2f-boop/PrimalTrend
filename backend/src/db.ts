@@ -2,6 +2,7 @@ import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
+import { randomUUID } from "crypto";
 import { Product, products } from "./catalog";
 
 dotenv.config();
@@ -36,6 +37,26 @@ type OrderInput = {
   customerEmail: string | null;
   status: string | null;
   items: OrderItemInput[];
+};
+
+type CartItemRow = {
+  product_id: string;
+  size: string;
+  qty: number;
+  slug: string;
+  name: string;
+  price: number;
+  image: string;
+};
+
+export type CartItemDetailed = {
+  productId: string;
+  slug: string;
+  name: string;
+  price: number;
+  image: string;
+  size: string;
+  qty: number;
 };
 
 const dbPath =
@@ -83,6 +104,25 @@ db.exec(`
     unit_price INTEGER NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id)
   );
+
+  CREATE TABLE IF NOT EXISTS carts (
+    id TEXT PRIMARY KEY,
+    status TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS cart_items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cart_id TEXT NOT NULL,
+    product_id TEXT NOT NULL,
+    size TEXT NOT NULL,
+    qty INTEGER NOT NULL,
+    UNIQUE (cart_id, product_id, size),
+    FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE
+  );
+
+  CREATE INDEX IF NOT EXISTS cart_items_cart_id ON cart_items(cart_id);
 `);
 
 const productColumns = db
@@ -230,4 +270,95 @@ export function upsertOrder(order: OrderInput) {
   });
 
   tx(order);
+}
+
+export function createCart(): string {
+  const id = randomUUID();
+  const now = new Date().toISOString();
+  db.prepare(
+    `INSERT INTO carts (id, status, created_at, updated_at)
+     VALUES (?, 'open', ?, ?)`
+  ).run(id, now, now);
+  return id;
+}
+
+export function cartExists(id: string): boolean {
+  const row = db
+    .prepare("SELECT 1 as existsFlag FROM carts WHERE id = ?")
+    .get(id) as { existsFlag?: number } | undefined;
+  return Boolean(row?.existsFlag);
+}
+
+export function touchCart(id: string) {
+  db.prepare("UPDATE carts SET updated_at = ? WHERE id = ?").run(
+    new Date().toISOString(),
+    id
+  );
+}
+
+export function listCartItemsDetailed(cartId: string): CartItemDetailed[] {
+  const rows = db
+    .prepare(
+      `SELECT ci.product_id, ci.size, ci.qty, p.slug, p.name, p.price, p.image
+       FROM cart_items ci
+       JOIN products p ON p.id = ci.product_id
+       WHERE ci.cart_id = ?
+       ORDER BY ci.id`
+    )
+    .all(cartId) as CartItemRow[];
+
+  return rows.map((row) => ({
+    productId: row.product_id,
+    slug: row.slug,
+    name: row.name,
+    price: row.price,
+    image: row.image,
+    size: row.size,
+    qty: row.qty
+  }));
+}
+
+export function addCartItem(
+  cartId: string,
+  productId: string,
+  size: string,
+  qty: number
+) {
+  db.prepare(
+    `INSERT INTO cart_items (cart_id, product_id, size, qty)
+     VALUES (@cartId, @productId, @size, @qty)
+     ON CONFLICT(cart_id, product_id, size)
+     DO UPDATE SET qty = qty + excluded.qty`
+  ).run({ cartId, productId, size, qty });
+  touchCart(cartId);
+}
+
+export function setCartItemQty(
+  cartId: string,
+  productId: string,
+  size: string,
+  qty: number
+) {
+  if (qty <= 0) {
+    removeCartItem(cartId, productId, size);
+    return;
+  }
+  db.prepare(
+    `UPDATE cart_items
+     SET qty = ?
+     WHERE cart_id = ? AND product_id = ? AND size = ?`
+  ).run(qty, cartId, productId, size);
+  touchCart(cartId);
+}
+
+export function removeCartItem(cartId: string, productId: string, size: string) {
+  db.prepare(
+    `DELETE FROM cart_items WHERE cart_id = ? AND product_id = ? AND size = ?`
+  ).run(cartId, productId, size);
+  touchCart(cartId);
+}
+
+export function clearCartItems(cartId: string) {
+  db.prepare(`DELETE FROM cart_items WHERE cart_id = ?`).run(cartId);
+  touchCart(cartId);
 }

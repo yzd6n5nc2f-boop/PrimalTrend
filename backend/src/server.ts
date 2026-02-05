@@ -3,9 +3,16 @@ import cors from "cors";
 import dotenv from "dotenv";
 import Stripe from "stripe";
 import {
+  addCartItem,
+  cartExists,
+  clearCartItems,
+  createCart,
   findProductById,
   findProductBySlug,
   listProducts,
+  listCartItemsDetailed,
+  removeCartItem,
+  setCartItemQty,
   upsertOrder
 } from "./db";
 import { buildCartQuote, CartInputItem } from "./cart";
@@ -38,6 +45,22 @@ const allowedOrigins = (process.env.CORS_ORIGIN ?? siteUrl)
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripe = stripeSecretKey ? new Stripe(stripeSecretKey) : null;
+
+const buildCartResponse = (cartId: string) => {
+  const items = listCartItemsDetailed(cartId);
+  const quote = buildCartQuote(
+    items.map((item) => ({
+      productId: item.productId,
+      size: item.size,
+      qty: item.qty
+    }))
+  );
+  return {
+    cartId,
+    items,
+    quote
+  };
+};
 
 app.use(
   cors({
@@ -150,6 +173,118 @@ app.get("/api/products/:slug", (req, res) => {
   return res.json({ product });
 });
 
+app.post("/api/cart", (req, res) => {
+  const items = Array.isArray(req.body?.items) ? req.body.items : [];
+  try {
+    const cartId = createCart();
+    if (items.length > 0) {
+      const parsedItems = items.map((item: CartInputItem) => ({
+        productId: String(item.productId ?? ""),
+        size: String(item.size ?? ""),
+        qty: Number(item.qty ?? 0)
+      }));
+
+      if (parsedItems.some((item) => !item.productId || !item.size || item.qty <= 0)) {
+        throw new Error("Invalid cart payload");
+      }
+
+      for (const item of parsedItems) {
+        const product = findProductById(item.productId);
+        if (!product) {
+          throw new Error(`Unknown product ${item.productId}`);
+        }
+        if (!product.sizes.includes(item.size)) {
+          throw new Error(`Invalid size ${item.size} for ${item.productId}`);
+        }
+        addCartItem(cartId, item.productId, item.size, item.qty);
+      }
+    }
+
+    return res.json(buildCartResponse(cartId));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Cart creation failed";
+    return res.status(400).json({ error: message });
+  }
+});
+
+app.get("/api/cart/:cartId", (req, res) => {
+  const cartId = req.params.cartId;
+  if (!cartExists(cartId)) {
+    return res.status(404).json({ error: "Cart not found" });
+  }
+  return res.json(buildCartResponse(cartId));
+});
+
+app.post("/api/cart/:cartId/items", (req, res) => {
+  const cartId = req.params.cartId;
+  if (!cartExists(cartId)) {
+    return res.status(404).json({ error: "Cart not found" });
+  }
+
+  const productId = String(req.body?.productId ?? "");
+  const size = String(req.body?.size ?? "");
+  const qty = Number(req.body?.qty ?? 1);
+
+  if (!productId || !size || !Number.isFinite(qty) || qty <= 0) {
+    return res.status(400).json({ error: "Invalid cart payload" });
+  }
+
+  const product = findProductById(productId);
+  if (!product) {
+    return res.status(400).json({ error: "Unknown product" });
+  }
+  if (!product.sizes.includes(size)) {
+    return res.status(400).json({ error: "Invalid size" });
+  }
+
+  addCartItem(cartId, productId, size, qty);
+  return res.json(buildCartResponse(cartId));
+});
+
+app.patch("/api/cart/:cartId/items", (req, res) => {
+  const cartId = req.params.cartId;
+  if (!cartExists(cartId)) {
+    return res.status(404).json({ error: "Cart not found" });
+  }
+
+  const productId = String(req.body?.productId ?? "");
+  const size = String(req.body?.size ?? "");
+  const qty = Number(req.body?.qty ?? 0);
+
+  if (!productId || !size || !Number.isFinite(qty)) {
+    return res.status(400).json({ error: "Invalid cart payload" });
+  }
+
+  setCartItemQty(cartId, productId, size, qty);
+  return res.json(buildCartResponse(cartId));
+});
+
+app.delete("/api/cart/:cartId/items", (req, res) => {
+  const cartId = req.params.cartId;
+  if (!cartExists(cartId)) {
+    return res.status(404).json({ error: "Cart not found" });
+  }
+
+  const productId = String(req.body?.productId ?? "");
+  const size = String(req.body?.size ?? "");
+  if (!productId || !size) {
+    return res.status(400).json({ error: "Invalid cart payload" });
+  }
+
+  removeCartItem(cartId, productId, size);
+  return res.json(buildCartResponse(cartId));
+});
+
+app.post("/api/cart/:cartId/clear", (req, res) => {
+  const cartId = req.params.cartId;
+  if (!cartExists(cartId)) {
+    return res.status(404).json({ error: "Cart not found" });
+  }
+
+  clearCartItems(cartId);
+  return res.json(buildCartResponse(cartId));
+});
+
 app.post("/api/cart/quote", (req, res) => {
   const items = Array.isArray(req.body?.items) ? req.body.items : [];
   if (items.length === 0) {
@@ -257,6 +392,113 @@ app.post("/api/cart/checkout", async (req, res) => {
       metadata: {
         cart: JSON.stringify(
           parsedItems.map(({ productId, size, qty }) => ({
+            productId,
+            size,
+            qty
+          }))
+        )
+      }
+    });
+
+    upsertOrder({
+      id: session.id,
+      stripeSessionId: session.id,
+      amountTotalMinor: quote.totalMinor,
+      currency: quote.currency,
+      customerEmail: null,
+      status: "created",
+      items: quote.lineItems.map((item) => ({
+        productId: item.productId,
+        size: item.size,
+        qty: item.qty,
+        unitPriceMinor: item.unitPriceMinor
+      }))
+    });
+
+    return res.json({ url: session.url, id: session.id });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Checkout failed";
+    console.error("Checkout error", message);
+    return res.status(400).json({ error: message });
+  }
+});
+
+app.post("/api/cart/:cartId/checkout", async (req, res) => {
+  if (!stripe) {
+    return res.status(500).json({ error: "Stripe is not configured" });
+  }
+
+  const cartId = req.params.cartId;
+  if (!cartExists(cartId)) {
+    return res.status(404).json({ error: "Cart not found" });
+  }
+
+  try {
+    const items = listCartItemsDetailed(cartId);
+    if (items.length === 0) {
+      return res.status(400).json({ error: "Cart is empty" });
+    }
+
+    const quote = buildCartQuote(
+      items.map((item) => ({
+        productId: item.productId,
+        size: item.size,
+        qty: item.qty
+      }))
+    );
+
+    const lineItems = quote.lineItems.map((item) => {
+      const product = findProductById(item.productId);
+      if (!product) {
+        throw new Error(`Unknown product ${item.productId}`);
+      }
+      const imageUrl = new URL(product.image, siteUrl).toString();
+
+      return {
+        quantity: item.qty,
+        price_data: {
+          currency: checkoutCurrency,
+          unit_amount: item.unitPriceMinor,
+          product_data: {
+            name: item.name,
+            description: product.description,
+            images: [imageUrl],
+            metadata: {
+              productId: product.id,
+              size: item.size
+            }
+          }
+        }
+      } as Stripe.Checkout.SessionCreateParams.LineItem;
+    });
+
+    if (quote.shippingMinor > 0) {
+      lineItems.push({
+        quantity: 1,
+        price_data: {
+          currency: checkoutCurrency,
+          unit_amount: quote.shippingMinor,
+          product_data: {
+            name: "Shipping"
+          }
+        }
+      });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: lineItems,
+      success_url: successUrl,
+      cancel_url: cancelUrl,
+      automatic_payment_methods: { enabled: true },
+      automatic_tax: { enabled: taxEnabled },
+      billing_address_collection: billingAddressRequired ? "required" : "auto",
+      shipping_address_collection: {
+        allowed_countries: shippingCountries
+      },
+      metadata: {
+        cart: JSON.stringify(
+          items.map(({ productId, size, qty }) => ({
             productId,
             size,
             qty

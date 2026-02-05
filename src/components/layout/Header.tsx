@@ -6,13 +6,14 @@ import { Search, User, ShoppingBag, Menu } from "lucide-react";
 import { IconButton } from "@/components/ui/IconButton";
 import { MegaMenuShop } from "@/components/layout/MegaMenuShop";
 import { MegaMenuTribes } from "@/components/layout/MegaMenuTribes";
-import { useCartTotals } from "@/store/cartStore";
+import { useCartStore, useCartTotals } from "@/store/cartStore";
 import { useUiStore } from "@/store/uiStore";
 import { cn } from "@/lib/cn";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { count } = useCartTotals();
+  const initCart = useCartStore((state) => state.initCart);
   const setMobileNavOpen = useUiStore((state) => state.setMobileNavOpen);
 
   useEffect(() => {
@@ -23,6 +24,10 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    void initCart();
+  }, [initCart]);
 
   return (
     <header
