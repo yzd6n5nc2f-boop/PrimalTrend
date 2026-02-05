@@ -150,11 +150,17 @@ export function findProductById(id: string): Product | null {
   return row ? mapProduct(row) : null;
 }
 
-export function insertOrder(order: OrderInput) {
+export function upsertOrder(order: OrderInput) {
   const insertOrderStmt = db.prepare(
-    `INSERT OR IGNORE INTO orders
+    `INSERT INTO orders
       (id, stripe_session_id, amount_total, currency, customer_email, status, created_at)
-      VALUES (@id, @stripeSessionId, @amountTotalMinor, @currency, @customerEmail, @status, @createdAt)`
+      VALUES (@id, @stripeSessionId, @amountTotalMinor, @currency, @customerEmail, @status, @createdAt)
+      ON CONFLICT(id) DO UPDATE SET
+        stripe_session_id = excluded.stripe_session_id,
+        amount_total = COALESCE(excluded.amount_total, orders.amount_total),
+        currency = COALESCE(excluded.currency, orders.currency),
+        customer_email = COALESCE(excluded.customer_email, orders.customer_email),
+        status = COALESCE(excluded.status, orders.status)`
   );
 
   const insertItemStmt = db.prepare(
@@ -163,8 +169,12 @@ export function insertOrder(order: OrderInput) {
       VALUES (@orderId, @productId, @size, @qty, @unitPriceMinor)`
   );
 
+  const itemCountStmt = db.prepare(
+    `SELECT COUNT(1) as count FROM order_items WHERE order_id = ?`
+  );
+
   const tx = db.transaction((payload: OrderInput) => {
-    const result = insertOrderStmt.run({
+    insertOrderStmt.run({
       id: payload.id,
       stripeSessionId: payload.stripeSessionId,
       amountTotalMinor: payload.amountTotalMinor,
@@ -174,7 +184,8 @@ export function insertOrder(order: OrderInput) {
       createdAt: new Date().toISOString()
     });
 
-    if (result.changes === 0) {
+    const existing = itemCountStmt.get(payload.id) as { count: number };
+    if (existing.count > 0) {
       return;
     }
 

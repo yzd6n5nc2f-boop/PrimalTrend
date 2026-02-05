@@ -24,6 +24,7 @@ See `.env.example` for required values.
 - `GET /health`
 - `GET /api/products`
 - `GET /api/products/:slug`
+- `POST /api/cart/quote`
 - `POST /api/cart/checkout`
 - `POST /api/stripe/webhook`
 
@@ -31,3 +32,4 @@ See `.env.example` for required values.
 
 - SQLite data lives at `DATABASE_PATH` (default: `backend/data/primaltrend.db`).
 - Product data is seeded from `backend/src/catalog.ts` on first run.
+- Checkout uses Stripe automatic payment methods and can enable automatic tax (see `.env.example`).
