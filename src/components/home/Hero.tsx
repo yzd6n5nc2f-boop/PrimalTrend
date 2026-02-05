@@ -9,7 +9,7 @@ export function Hero() {
         src="/images/hero/hero-home.png"
         alt="PRIMAL TREND hero"
         fill
-        className="z-0 object-cover grayscale"
+        className="z-0 object-cover brightness-110 saturate-110"
         priority
       />
       <div className="absolute inset-0 z-10 hero-overlay noise-bg" />

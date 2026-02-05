@@ -37,9 +37,9 @@ export function TribeTiles() {
               src={tile.image}
               alt={tile.title}
               fill
-              className="object-cover grayscale transition duration-150 ease-primal group-hover:scale-[1.03]"
+              className="object-cover transition duration-150 ease-primal group-hover:scale-[1.03] brightness-110 saturate-110"
             />
-            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-black/35" />
             <div className="absolute bottom-6 left-6">
               <h3 className="font-display text-2xl uppercase">{tile.title}</h3>
               <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/70">

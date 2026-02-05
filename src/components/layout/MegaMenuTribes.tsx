@@ -26,7 +26,7 @@ export function MegaMenuTribes() {
                     alt={tribe.name}
                     width={72}
                     height={72}
-                    className="h-16 w-16 rounded-[12px] object-cover grayscale"
+                    className="h-16 w-16 rounded-[12px] object-cover brightness-110 saturate-110"
                   />
                   <div>
                     <p className="font-display text-lg uppercase">{tribe.name}</p>

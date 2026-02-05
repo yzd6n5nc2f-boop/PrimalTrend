@@ -15,7 +15,7 @@ export function ProductCard({ product }: { product: Product }) {
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover grayscale transition duration-150 ease-primal group-hover:scale-[1.03]"
+          className="object-cover transition duration-150 ease-primal group-hover:scale-[1.03] brightness-110 saturate-110"
         />
         <div className="absolute left-3 top-3 flex gap-2">
           {product.isNew && <Badge label="New" />}

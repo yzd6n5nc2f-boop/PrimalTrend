@@ -28,9 +28,9 @@ export default async function CollectionPage({
           src={tribe.image}
           alt={tribe.name}
           fill
-          className="object-cover object-[50%_10%] grayscale"
+          className="object-cover object-[50%_10%] brightness-110 saturate-110"
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/40" />
         <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-4 md:px-6">
           <p className="text-[12px] uppercase tracking-[0.22em] text-[#7D8696]">
             Tribe

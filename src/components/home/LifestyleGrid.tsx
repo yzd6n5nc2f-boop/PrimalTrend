@@ -19,9 +19,9 @@ export function LifestyleGrid() {
               src={item.image}
               alt={item.title}
               fill
-              className="object-cover grayscale transition duration-150 ease-primal group-hover:scale-[1.03]"
+              className="object-cover transition duration-150 ease-primal group-hover:scale-[1.03] brightness-110 saturate-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
             <p className="absolute bottom-6 left-6 font-display text-xl uppercase">
               {item.title}
             </p>

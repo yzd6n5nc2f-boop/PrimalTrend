@@ -9,7 +9,12 @@ export function ProductGallery({ images }: { images: string[] }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="relative h-[420px] overflow-hidden rounded-[20px] border border-[#1F2430]">
-        <Image src={active} alt="Product image" fill className="object-cover grayscale" />
+        <Image
+          src={active}
+          alt="Product image"
+          fill
+          className="object-cover brightness-110 saturate-110"
+        />
       </div>
       <div className="flex gap-3">
         {images.map((image) => (
@@ -24,7 +29,12 @@ export function ProductGallery({ images }: { images: string[] }) {
             }
             aria-label="Select product image"
           >
-            <Image src={image} alt="Thumbnail" fill className="object-cover grayscale" />
+            <Image
+              src={image}
+              alt="Thumbnail"
+              fill
+              className="object-cover brightness-110 saturate-110"
+            />
           </button>
         ))}
       </div>

@@ -46,9 +46,9 @@ export default async function ShopPage() {
                 src={item.image}
                 alt={item.label}
                 fill
-                className="object-cover grayscale transition duration-150 group-hover:scale-[1.03]"
+                className="object-cover object-[50%_20%] transition duration-150 group-hover:scale-[1.03] brightness-110 saturate-110"
               />
-              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute inset-0 bg-black/30" />
               <p className="absolute bottom-6 left-6 font-display text-2xl uppercase">
                 {item.label}
               </p>

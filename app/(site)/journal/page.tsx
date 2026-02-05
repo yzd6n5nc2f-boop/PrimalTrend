@@ -24,7 +24,7 @@ export default function JournalPage() {
                   src={post.image}
                   alt={post.title}
                   fill
-                  className="object-cover grayscale"
+                  className="object-cover brightness-110 saturate-110"
                 />
               </div>
               <div className="p-5">
