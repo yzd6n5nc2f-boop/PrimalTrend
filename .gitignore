@@ -2,4 +2,7 @@ node_modules/
 .next/
 out/
 .env.local
+backend/.env
+backend/data/
+backend/dist/
 .DS_Store

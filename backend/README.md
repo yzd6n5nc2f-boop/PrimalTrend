@@ -1,19 +1,33 @@
-# PRIMAL TREND Backend (Placeholder)
+# PRIMAL TREND Backend
 
-This directory is reserved for future API development.
+Lightweight Express + SQLite backend with Stripe Checkout support.
 
-## Planned Endpoints
+## Setup
 
+```bash
+cd backend
+pnpm install
+cp .env.example .env
+pnpm dev
+```
+
+## Environment
+
+See `.env.example` for required values.
+
+- `STRIPE_SECRET_KEY` is required for checkout.
+- `STRIPE_WEBHOOK_SECRET` is required if you want to record orders via webhooks.
+- `PUBLIC_SITE_URL` should match your Next.js frontend origin.
+
+## Endpoints
+
+- `GET /health`
 - `GET /api/products`
 - `GET /api/products/:slug`
 - `POST /api/cart/checkout`
-- `POST /api/auth/login`
-- `POST /api/auth/register`
-- `GET /api/journal`
+- `POST /api/stripe/webhook`
 
-## Local Development
+## Notes
 
-```bash
-pnpm install
-pnpm dev
-```
+- SQLite data lives at `DATABASE_PATH` (default: `backend/data/primaltrend.db`).
+- Product data is seeded from `backend/src/catalog.ts` on first run.
