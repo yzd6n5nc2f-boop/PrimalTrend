@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "@/data/products";
 import { formatPrice } from "@/lib/format";
 import { Badge } from "@/components/ui/Badge";
@@ -10,7 +10,14 @@ import { useCartStore } from "@/store/cartStore";
 
 export function ProductInfo({ product }: { product: Product }) {
   const [size, setSize] = useState<string | undefined>();
+  const [message, setMessage] = useState<string | null>(null);
   const addItem = useCartStore((state) => state.addItem);
+
+  useEffect(() => {
+    if (!message) return;
+    const timeout = window.setTimeout(() => setMessage(null), 2000);
+    return () => window.clearTimeout(timeout);
+  }, [message]);
 
   return (
     <div className="space-y-6">
@@ -32,11 +39,23 @@ export function ProductInfo({ product }: { product: Product }) {
       <Button
         disabled={!size}
         onClick={() => {
-          if (size) addItem(product, size);
+          if (size) {
+            addItem(product, size);
+            setMessage("Added to bag.");
+          }
         }}
       >
         Add to bag
       </Button>
+      {message ? (
+        <p className="text-xs uppercase tracking-[0.18em] text-emerald-300">
+          {message}
+        </p>
+      ) : (
+        <p className="text-xs uppercase tracking-[0.18em] text-white/40">
+          Select a size to add to bag.
+        </p>
+      )}
       <p className="text-xs uppercase tracking-[0.18em] text-white/50">
         Free UK shipping over £60
       </p>

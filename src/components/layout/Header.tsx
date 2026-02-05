@@ -71,14 +71,26 @@ export function Header() {
               )}
             </Link>
           </div>
-          <button
-            className="flex items-center gap-2 text-sm uppercase tracking-[0.2em] md:hidden"
-            onClick={() => setMobileNavOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu size={20} />
-            Menu
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <Link href="/cart" aria-label="Cart" className="relative focus-ring">
+              <IconButton aria-label="Cart">
+                <ShoppingBag size={18} />
+              </IconButton>
+              {count > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-black">
+                  {count}
+                </span>
+              )}
+            </Link>
+            <button
+              className="flex items-center gap-2 text-sm uppercase tracking-[0.2em]"
+              onClick={() => setMobileNavOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu size={20} />
+              Menu
+            </button>
+          </div>
         </div>
       </div>
     </header>
