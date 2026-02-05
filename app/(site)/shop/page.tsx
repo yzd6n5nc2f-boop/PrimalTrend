@@ -29,12 +29,12 @@ export default async function ShopPage() {
             {
               label: "Men",
               href: "/shop/men",
-              image: "/images/categories/men.jpg"
+              image: "/images/categories/men.png"
             },
             {
               label: "Women",
               href: "/shop/women",
-              image: "/images/categories/women.jpg"
+              image: "/images/categories/women.png"
             }
           ].map((item) => (
             <Link
