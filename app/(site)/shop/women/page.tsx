@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 import { WomenShopPageClient } from "./WomenShopPageClient";
+import { fetchProducts } from "@/lib/api";
 
-export default function WomenShopPage() {
+export default async function WomenShopPage() {
+  const products = await fetchProducts();
   return (
     <Suspense fallback={<div className="section-spacing" />}>
-      <WomenShopPageClient />
+      <WomenShopPageClient products={products} />
     </Suspense>
   );
 }

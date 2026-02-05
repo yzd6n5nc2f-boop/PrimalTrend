@@ -4,9 +4,13 @@ import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SearchBar } from "@/components/search/SearchBar";
 import { SearchResults } from "@/components/search/SearchResults";
-import { products } from "@/data/products";
+import type { Product } from "@/data/products";
 
-export function SearchPageClient() {
+type SearchPageClientProps = {
+  products: Product[];
+};
+
+export function SearchPageClient({ products }: SearchPageClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const initialQuery = searchParams.get("q") ?? "";
@@ -21,7 +25,7 @@ export function SearchPageClient() {
         product.tribeTags.some((tag) => tag.includes(normalized)) ||
         product.sportTags.some((tag) => tag.includes(normalized))
     );
-  }, [query]);
+  }, [query, products]);
 
   return (
     <div className="section-spacing">

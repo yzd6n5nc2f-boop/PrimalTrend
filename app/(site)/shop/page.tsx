@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/data/products";
 import { ProductGrid } from "@/components/shop/ProductGrid";
+import { fetchProducts } from "@/lib/api";
 
 export const metadata = {
   title: "Shop"
 };
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const products = await fetchProducts();
   return (
     <div className="section-spacing">
       <div className="mx-auto max-w-[1280px] px-4 md:px-6">

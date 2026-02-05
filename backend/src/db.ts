@@ -130,7 +130,7 @@ const mapProduct = (row: ProductRow): Product => ({
 });
 
 export function listProducts(): Product[] {
-  const rows = db.prepare("SELECT * FROM products ORDER BY name").all() as
+  const rows = db.prepare("SELECT * FROM products ORDER BY id").all() as
     | ProductRow[]
     | undefined;
   return (rows ?? []).map(mapProduct);

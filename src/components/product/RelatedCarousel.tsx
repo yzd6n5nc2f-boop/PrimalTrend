@@ -1,7 +1,11 @@
-import { products } from "@/data/products";
 import { ProductCard } from "@/components/shop/ProductCard";
+import type { Product } from "@/data/products";
 
-export function RelatedCarousel() {
+type RelatedCarouselProps = {
+  products: Product[];
+};
+
+export function RelatedCarousel({ products }: RelatedCarouselProps) {
   return (
     <div className="overflow-x-auto">
       <div className="flex min-w-[720px] gap-6">

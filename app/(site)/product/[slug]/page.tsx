@@ -1,17 +1,16 @@
 import { notFound } from "next/navigation";
-import { products } from "@/data/products";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductInfo } from "@/components/product/ProductInfo";
 import { DetailsAccordion } from "@/components/product/DetailsAccordion";
 import { RelatedCarousel } from "@/components/product/RelatedCarousel";
+import { fetchProducts } from "@/lib/api";
 
-export const dynamic = "force-static";
-
-export function generateStaticParams() {
-  return products.map((product) => ({ slug: product.slug }));
-}
-
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default async function ProductPage({
+  params
+}: {
+  params: { slug: string };
+}) {
+  const products = await fetchProducts();
   const product = products.find((item) => item.slug === params.slug);
   if (!product) return notFound();
 
@@ -37,7 +36,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             Related
           </p>
           <div className="mt-6">
-            <RelatedCarousel />
+            <RelatedCarousel products={products} />
           </div>
         </div>
       </div>

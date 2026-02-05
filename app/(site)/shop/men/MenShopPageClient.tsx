@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { products } from "@/data/products";
+import type { Product } from "@/data/products";
 import { applyFilters } from "@/lib/filters";
 import { parseFilterState, buildFilterQuery } from "@/lib/queryState";
 import { FiltersSidebar } from "@/components/shop/FiltersSidebar";
@@ -11,7 +11,11 @@ import { SortMenu } from "@/components/shop/SortMenu";
 import { ActiveFiltersBar } from "@/components/shop/ActiveFiltersBar";
 import { ProductGrid } from "@/components/shop/ProductGrid";
 
-export function MenShopPageClient() {
+type MenShopPageClientProps = {
+  products: Product[];
+};
+
+export function MenShopPageClient({ products }: MenShopPageClientProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -20,7 +24,10 @@ export function MenShopPageClient() {
     [searchParams]
   );
 
-  const results = useMemo(() => applyFilters(products, filters), [filters]);
+  const results = useMemo(
+    () => applyFilters(products, filters),
+    [filters, products]
+  );
 
   const updateFilters = (nextFilters: typeof filters) => {
     router.replace(`${pathname}${buildFilterQuery(nextFilters)}`);

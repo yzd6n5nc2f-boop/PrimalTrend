@@ -1,19 +1,22 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { tribes } from "@/data/tribes";
-import { products } from "@/data/products";
 import { ProductGrid } from "@/components/shop/ProductGrid";
-
-export const dynamic = "force-static";
+import { fetchProducts } from "@/lib/api";
 
 export function generateStaticParams() {
   return tribes.map((tribe) => ({ slug: tribe.slug }));
 }
 
-export default function CollectionPage({ params }: { params: { slug: string } }) {
+export default async function CollectionPage({
+  params
+}: {
+  params: { slug: string };
+}) {
   const tribe = tribes.find((item) => item.slug === params.slug);
   if (!tribe) return notFound();
 
+  const products = await fetchProducts();
   const filtered = products.filter((product) =>
     product.tribeTags.includes(tribe.slug)
   );
