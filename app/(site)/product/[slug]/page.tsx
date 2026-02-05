@@ -4,6 +4,11 @@ import { ProductInfo } from "@/components/product/ProductInfo";
 import { DetailsAccordion } from "@/components/product/DetailsAccordion";
 import { RelatedCarousel } from "@/components/product/RelatedCarousel";
 import { fetchProducts } from "@/lib/api";
+import { products as catalogProducts } from "@/data/products";
+
+export function generateStaticParams() {
+  return catalogProducts.map((product) => ({ slug: product.slug }));
+}
 
 export default async function ProductPage({
   params
