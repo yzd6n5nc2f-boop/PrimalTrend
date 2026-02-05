@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
+const isExport = process.env.NEXT_OUTPUT_EXPORT === "true";
+
 const nextConfig = {
-  output: "export",
+  ...(isExport ? { output: "export" } : {}),
   images: {
     unoptimized: true
   }
