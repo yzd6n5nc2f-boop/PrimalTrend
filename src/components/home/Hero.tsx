@@ -9,7 +9,7 @@ export function Hero() {
         src="/images/hero/hero-home.png"
         alt="PRIMAL TREND hero"
         fill
-        className="z-0 object-cover brightness-110 saturate-110"
+        className="z-0 object-cover object-[center_20%] brightness-110 saturate-110"
         priority
       />
       <div className="absolute inset-0 z-10 hero-overlay noise-bg" />
@@ -17,10 +17,10 @@ export function Hero() {
         <Image
           src="/images/brand/logo-mark.png"
           alt="Primal Trend logo"
-          width={360}
-          height={360}
-          sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 240px"
-          className="pointer-events-none h-auto w-[240px] mix-blend-screen opacity-80 md:w-[320px] lg:w-[360px]"
+          width={300}
+          height={300}
+          sizes="(min-width: 1024px) 300px, (min-width: 768px) 260px, 200px"
+          className="pointer-events-none h-auto w-[200px] mix-blend-screen opacity-80 md:w-[260px] lg:w-[300px]"
           priority
         />
       </div>
