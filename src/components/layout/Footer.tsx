@@ -13,7 +13,7 @@ export function Footer() {
             Primal Trend
           </p>
           <p className="mt-4 text-sm text-white/60">
-            Train like your bloodline remembers.
+            Earn the edge.
           </p>
           <div className="mt-6 flex gap-2">
             <Input placeholder="Email address" type="email" />

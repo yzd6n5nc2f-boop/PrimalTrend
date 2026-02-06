@@ -48,9 +48,9 @@ export function MobileDrawer() {
                   </div>
                 </Accordion.Content>
               </Accordion.Item>
-              <Accordion.Item value="tribes" className="border-b border-[#1F2430]">
+              <Accordion.Item value="armory" className="border-b border-[#1F2430]">
                 <Accordion.Trigger className="w-full py-3 text-left">
-                  Tribes
+                  Armory
                 </Accordion.Trigger>
                 <Accordion.Content className="pb-4 text-xs text-white/70">
                   <div className="flex flex-col gap-2">

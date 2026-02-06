@@ -13,18 +13,29 @@ export function Hero() {
         priority
       />
       <div className="absolute inset-0 z-10 hero-overlay noise-bg" />
+      <div className="absolute inset-0 z-[15] flex items-center justify-center">
+        <Image
+          src="/images/brand/logo-mark.png"
+          alt="Primal Trend logo"
+          width={360}
+          height={360}
+          sizes="(min-width: 1024px) 360px, (min-width: 768px) 320px, 240px"
+          className="pointer-events-none h-auto w-[240px] mix-blend-screen opacity-80 md:w-[320px] lg:w-[360px]"
+          priority
+        />
+      </div>
       <div className="relative z-20 mx-auto flex h-full max-w-[1280px] items-center px-4 md:px-6">
         <div className="max-w-[520px]">
           <p className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-white/70">
-            Performance lineage
+            Performance grit
           </p>
           <h1 className="mt-4 font-display text-[42px] leading-[0.96] tracking-[-0.03em] text-white/95 md:text-[64px] md:leading-[0.9] md:tracking-[-0.04em]">
-            TRAIN LIKE YOUR
+            EARN THE
             <br />
-            BLOODLINE REMEMBERS
+            EDGE
           </h1>
           <p className="mt-4 text-[15px] text-[#A7AFBC] md:text-[16px]">
-            Modern ancestral performance wear built for strength, endurance, and
+            Modern performance wear built for strength, endurance, and
             discipline.
           </p>
           <Link
@@ -38,7 +49,7 @@ export function Hero() {
               <Button>Shop now</Button>
             </Link>
             <Link href="/collections/samurai">
-              <Button variant="secondary">Explore tribes</Button>
+              <Button variant="secondary">Explore armory</Button>
             </Link>
           </div>
           <p className="mt-4 text-xs uppercase tracking-[0.18em] text-white/60">

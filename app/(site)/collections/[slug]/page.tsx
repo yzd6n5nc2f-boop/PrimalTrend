@@ -33,7 +33,7 @@ export default async function CollectionPage({
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-4 md:px-6">
           <p className="text-[12px] uppercase tracking-[0.22em] text-[#7D8696]">
-            Tribe
+            Armory
           </p>
           <h1 className="font-display text-[32px] md:text-[44px]">
             {tribe.name}

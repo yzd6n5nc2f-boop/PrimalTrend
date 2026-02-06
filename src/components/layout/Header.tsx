@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Search, User, ShoppingBag, Menu } from "lucide-react";
@@ -46,11 +47,16 @@ export function Header() {
             Journal
           </Link>
         </nav>
-        <Link
-          href="/"
-          className="font-display text-lg uppercase tracking-[0.35em] text-white"
-        >
-          Primal Trend
+        <Link href="/" className="flex items-center justify-center">
+          <Image
+            src="/images/brand/logo-mark.png"
+            alt="Primal Trend"
+            width={36}
+            height={36}
+            className="h-8 w-8 mix-blend-screen opacity-90 md:h-9 md:w-9"
+            priority
+          />
+          <span className="sr-only">Primal Trend</span>
         </Link>
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2 md:flex">

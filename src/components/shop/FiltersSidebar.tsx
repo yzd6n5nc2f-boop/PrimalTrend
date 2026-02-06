@@ -32,7 +32,7 @@ export function FiltersSidebar({
         }
       />
       <FilterGroup
-        title="Tribe"
+        title="Armory"
         items={tribes.map((tribe) => tribe.slug)}
         selected={filters.tribe}
         onToggle={(value) => onChange({ ...filters, tribe: toggleValue(filters.tribe, value) })}

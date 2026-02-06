@@ -11,7 +11,7 @@ export function MegaMenuTribes() {
       <NavigationMenu.List>
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-white/80 transition hover:text-white focus-ring">
-            Tribes
+            Armory
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute left-0 top-full w-screen max-w-[1280px] px-4 md:px-6">
             <div className="mt-4 grid gap-4 rounded-[20px] border border-[#1F2430] bg-[#0B0D10]/95 p-6 text-sm text-white shadow-[0_12px_40px_rgba(0,0,0,0.4)] backdrop-blur-md md:grid-cols-3">
