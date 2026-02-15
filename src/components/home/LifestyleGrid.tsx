@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 const lifestyle = [
-  { title: "Run", image: "/images/lifestyle/run.jpg" },
-  { title: "Ride", image: "/images/lifestyle/ride.jpg" },
-  { title: "Trail", image: "/images/lifestyle/trail.jpg" }
+  { title: "Run", image: "/placeholders/lifestyle/run.svg" },
+  { title: "Ride", image: "/placeholders/lifestyle/ride.svg" },
+  { title: "Trail", image: "/placeholders/lifestyle/trail.svg" }
 ];
 
 export function LifestyleGrid() {

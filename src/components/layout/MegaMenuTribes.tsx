@@ -7,13 +7,13 @@ import { tribes } from "@/data/tribes";
 
 export function MegaMenuTribes() {
   return (
-    <NavigationMenu.Root className="relative">
+    <NavigationMenu.Root>
       <NavigationMenu.List>
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-white/80 transition hover:text-[#D7B56D] focus-ring">
             Armory
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="absolute left-0 top-full w-screen max-w-[1280px] px-4 md:px-6">
+          <NavigationMenu.Content className="fixed left-1/2 top-[72px] z-[70] w-[min(1280px,calc(100vw-2rem))] -translate-x-1/2 px-0">
             <div className="mt-4 grid gap-4 rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]/95 p-6 text-sm text-white shadow-[0_12px_40px_rgba(0,0,0,0.4)] backdrop-blur-md md:grid-cols-3">
               {tribes.map((tribe) => (
                 <Link
@@ -40,7 +40,6 @@ export function MegaMenuTribes() {
           </NavigationMenu.Content>
         </NavigationMenu.Item>
       </NavigationMenu.List>
-      <NavigationMenu.Viewport className="absolute left-0 top-full" />
     </NavigationMenu.Root>
   );
 }

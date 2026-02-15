@@ -1,4 +1,10 @@
-import { ButtonHTMLAttributes } from "react";
+import {
+  ButtonHTMLAttributes,
+  cloneElement,
+  isValidElement,
+  ReactElement,
+  ReactNode
+} from "react";
 import { cn } from "@/lib/cn";
 
 const baseStyles =
@@ -6,7 +12,7 @@ const baseStyles =
 
 const variants = {
   primary:
-    "border border-[#D7B56D]/70 bg-[#D7B56D] text-black shadow-[0_10px_30px_rgba(215,181,109,0.24)] hover:border-[#D7B56D] hover:bg-[#E2C588] hover:shadow-[0_12px_34px_rgba(215,181,109,0.34)]",
+    "border border-[#D7B56D]/70 bg-[#D7B56D] text-black shadow-[0_10px_30px_rgba(215,181,109,0.24)] hover:border-[#D7B56D] hover:bg-[#D7B56D]/90 hover:shadow-[0_12px_34px_rgba(215,181,109,0.34)]",
   secondary:
     "border border-[#D7B56D]/70 text-[#D7B56D] shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:border-[#D7B56D] hover:bg-[#D7B56D]/10 hover:shadow-[0_10px_28px_rgba(0,0,0,0.45)]",
   ghost: "border border-[#5B5F68] text-white hover:border-[#D7B56D] hover:text-[#D7B56D]"
@@ -14,17 +20,32 @@ const variants = {
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: keyof typeof variants;
+  asChild?: boolean;
+  children?: ReactNode;
 };
 
 export function Button({
   className,
   variant = "primary",
+  asChild = false,
+  children,
   ...props
 }: ButtonProps) {
+  const classes = cn(baseStyles, variants[variant], className);
+
+  if (asChild && isValidElement(children)) {
+    const child = children as ReactElement<{ className?: string }>;
+    return cloneElement(child, {
+      className: cn(classes, child.props.className)
+    });
+  }
+
   return (
     <button
-      className={cn(baseStyles, variants[variant], className)}
+      className={classes}
       {...props}
-    />
+    >
+      {children}
+    </button>
   );
 }

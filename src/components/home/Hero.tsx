@@ -39,12 +39,12 @@ export function Hero() {
             discipline.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-            <Link href="/shop">
-              <Button>Shop now</Button>
-            </Link>
-            <Link href="/collections/samurai">
-              <Button variant="secondary">Explore armory</Button>
-            </Link>
+            <Button asChild>
+              <Link href="/shop">Shop now</Link>
+            </Button>
+            <Button asChild variant="secondary">
+              <Link href="/collections/samurai">Explore armory</Link>
+            </Button>
           </div>
           <p className="mt-4 text-xs uppercase tracking-[0.18em] text-white/60">
             Built for gym, run, cycle, triathlon, swim.

@@ -49,8 +49,8 @@ export function Header() {
             className="h-8 w-8 mix-blend-screen opacity-95 md:h-10 md:w-10"
             priority
           />
-          <span className="whitespace-nowrap font-display text-[20px] uppercase leading-[0.88] tracking-[0.08em] text-white md:text-[36px]">
-            Primal Trend
+          <span className="whitespace-nowrap font-display text-[22px] uppercase leading-[0.88] tracking-[0.09em] text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.4)] md:text-[38px]">
+            PRIMAL TREND
           </span>
         </Link>
         <nav className="hidden items-center justify-center gap-6 text-[11px] uppercase tracking-[0.22em] text-white/80 md:flex">

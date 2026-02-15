@@ -19,7 +19,7 @@ export function Footer() {
               className="h-8 w-8 mix-blend-screen opacity-95"
             />
             <span className="font-display text-[30px] uppercase leading-none tracking-[0.08em]">
-              Primal Trend
+              PRIMAL TREND
             </span>
           </Link>
           <p className="mt-4 text-sm text-white/60">

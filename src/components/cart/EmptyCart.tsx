@@ -8,9 +8,9 @@ export function EmptyCart() {
       <p className="mt-2 text-sm text-white/60">
         Build your loadout with monochrome performance essentials.
       </p>
-      <Link href="/shop" className="mt-6 inline-block">
-        <Button>Shop now</Button>
-      </Link>
+      <Button asChild className="mt-6">
+        <Link href="/shop">Shop now</Link>
+      </Button>
     </div>
   );
 }

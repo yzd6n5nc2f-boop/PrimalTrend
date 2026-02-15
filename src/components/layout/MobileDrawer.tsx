@@ -26,7 +26,7 @@ export function MobileDrawer() {
                 className="h-7 w-7 mix-blend-screen opacity-95"
               />
               <span className="font-display text-[24px] uppercase leading-none tracking-[0.08em]">
-                Primal Trend
+                PRIMAL TREND
               </span>
             </Link>
             <Dialog.Close asChild>
