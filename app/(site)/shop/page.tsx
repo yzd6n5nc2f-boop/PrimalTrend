@@ -37,7 +37,7 @@ export default async function ShopPage() {
               href: "/shop/women",
               image: "/images/categories/women.png",
               imageClass:
-                "object-[50%_8%] scale-[1.08] group-hover:scale-[1.11]"
+                "object-[50%_10%] scale-100 group-hover:scale-[1.03]"
             }
           ].map((item) => (
             <Link
