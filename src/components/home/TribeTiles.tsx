@@ -1,27 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
+import { tribes } from "@/data/tribes";
 
 // Tribe image filenames must be lowercase to match slug (Linux is case-sensitive).
 const tiles = [
   {
-    title: "Samurai",
-    meta: "Precision. Discipline. Endurance.",
-    href: "/collections/samurai",
-    image: "/images/tribes/samurai.png"
+    slug: "samurai",
+    meta: "Precision. Discipline. Endurance."
   },
   {
-    title: "Viking",
-    meta: "Strength. Resilience. Fire.",
-    href: "/collections/viking",
-    image: "/images/tribes/viking.png"
+    slug: "viking",
+    meta: "Strength. Resilience. Fire."
   },
   {
-    title: "Maasai",
-    meta: "Agility. Speed. Stamina.",
-    href: "/collections/maasai",
-    image: "/images/tribes/maasai.png"
+    slug: "maasai",
+    meta: "Agility. Speed. Stamina."
   }
-];
+].map((tile) => {
+  const tribe = tribes.find((item) => item.slug === tile.slug);
+  if (!tribe) {
+    throw new Error(`Missing tribe for tile: ${tile.slug}`);
+  }
+  return {
+    title: tribe.name,
+    meta: tile.meta,
+    href: `/collections/${tribe.slug}`,
+    image: tribe.image,
+    imagePosition: tribe.heroPosition
+  };
+});
 
 export function TribeTiles() {
   return (
@@ -37,7 +44,8 @@ export function TribeTiles() {
               src={tile.image}
               alt={tile.title}
               fill
-              className="object-cover transition duration-150 ease-primal group-hover:scale-[1.03] brightness-110 saturate-110"
+              style={{ objectPosition: tile.imagePosition }}
+              className="object-cover scale-[0.95] transition duration-150 ease-primal group-hover:scale-[0.98] brightness-110 saturate-110"
             />
             <div className="absolute inset-0 bg-black/35" />
             <div className="absolute bottom-6 left-6">

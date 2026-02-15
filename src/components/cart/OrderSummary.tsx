@@ -13,6 +13,24 @@ type CartQuote = {
   totalMinor: number;
 };
 
+const toUserErrorMessage = (
+  error: unknown,
+  fallback: string
+) => {
+  if (
+    error instanceof TypeError &&
+    /(load failed|failed to fetch|networkerror)/i.test(error.message)
+  ) {
+    return "Unable to reach checkout service. Start backend on http://localhost:4000 and verify NEXT_PUBLIC_API_URL.";
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return fallback;
+};
+
 export function OrderSummary() {
   const totals = useCartTotals();
   const items = useCartStore((state) => state.items);
@@ -66,10 +84,10 @@ export function OrderSummary() {
         }
       } catch (err) {
         if (!cancelled) {
-          const message =
-            err instanceof Error
-              ? err.message
-              : "Unable to calculate totals right now.";
+          const message = toUserErrorMessage(
+            err,
+            "Unable to calculate totals right now."
+          );
           setQuoteError(message);
           setQuote(null);
         }
@@ -127,8 +145,10 @@ export function OrderSummary() {
 
       throw new Error("Missing checkout URL.");
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Checkout failed. Please try again.";
+      const message = toUserErrorMessage(
+        err,
+        "Checkout failed. Please try again."
+      );
       setError(message);
     } finally {
       setIsLoading(false);

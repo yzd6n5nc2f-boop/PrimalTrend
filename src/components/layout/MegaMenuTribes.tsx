@@ -24,9 +24,10 @@ export function MegaMenuTribes() {
                   <Image
                     src={tribe.image}
                     alt={tribe.name}
-                    width={72}
-                    height={72}
-                    className="h-16 w-16 rounded-[12px] object-cover brightness-110 saturate-110"
+                    width={80}
+                    height={80}
+                    style={{ objectPosition: tribe.thumbnailPosition }}
+                    className="h-[72px] w-[72px] rounded-[12px] object-cover brightness-110 saturate-110 md:h-20 md:w-20"
                   />
                   <div>
                     <p className="font-display text-lg uppercase">{tribe.name}</p>

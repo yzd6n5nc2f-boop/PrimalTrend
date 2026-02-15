@@ -44,7 +44,67 @@ const allowedOrigins = (process.env.CORS_ORIGIN ?? siteUrl)
   .filter(Boolean);
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-const stripe = stripeSecretKey ? new Stripe(stripeSecretKey) : null;
+const stripeConfigError =
+  "Stripe is not configured. Set STRIPE_SECRET_KEY=sk_... in backend/.env and restart the backend.";
+const hasStripeSecret =
+  typeof stripeSecretKey === "string" &&
+  stripeSecretKey.startsWith("sk_") &&
+  !stripeSecretKey.includes("...");
+const stripe = hasStripeSecret ? new Stripe(stripeSecretKey) : null;
+
+type CheckoutLineItemInput = {
+  productId: string;
+  size: string;
+  qty: number;
+  unitPriceMinor: number;
+  name: string;
+};
+
+const canUseStripeImageUrl = (value: string) => {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:") return false;
+    const hostname = url.hostname.toLowerCase();
+    return !(
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname.endsWith(".local")
+    );
+  } catch {
+    return false;
+  }
+};
+
+const buildStripeLineItem = (item: CheckoutLineItemInput) => {
+  const product = findProductById(item.productId);
+  if (!product) {
+    throw new Error(`Unknown product ${item.productId}`);
+  }
+
+  const imageUrl = new URL(product.image, siteUrl).toString();
+  const productData: Stripe.Checkout.SessionCreateParams.LineItem.PriceData.ProductData =
+    {
+      name: item.name,
+      description: product.description,
+      metadata: {
+        productId: product.id,
+        size: item.size
+      }
+    };
+
+  if (canUseStripeImageUrl(imageUrl)) {
+    productData.images = [imageUrl];
+  }
+
+  return {
+    quantity: item.qty,
+    price_data: {
+      currency: checkoutCurrency,
+      unit_amount: item.unitPriceMinor,
+      product_data: productData
+    }
+  } as Stripe.Checkout.SessionCreateParams.LineItem;
+};
 
 const buildCartResponse = (cartId: string) => {
   const items = listCartItemsDetailed(cartId);
@@ -319,7 +379,7 @@ app.post("/api/cart/quote", (req, res) => {
 
 app.post("/api/cart/checkout", async (req, res) => {
   if (!stripe) {
-    return res.status(500).json({ error: "Stripe is not configured" });
+    return res.status(500).json({ error: stripeConfigError });
   }
 
   const items = Array.isArray(req.body?.items) ? req.body.items : [];
@@ -340,30 +400,7 @@ app.post("/api/cart/checkout", async (req, res) => {
 
     const quote = buildCartQuote(parsedItems);
 
-    const lineItems = quote.lineItems.map((item) => {
-      const product = findProductById(item.productId);
-      if (!product) {
-        throw new Error(`Unknown product ${item.productId}`);
-      }
-      const imageUrl = new URL(product.image, siteUrl).toString();
-
-      return {
-        quantity: item.qty,
-        price_data: {
-          currency: checkoutCurrency,
-          unit_amount: item.unitPriceMinor,
-          product_data: {
-            name: item.name,
-            description: product.description,
-            images: [imageUrl],
-            metadata: {
-              productId: product.id,
-              size: item.size
-            }
-          }
-        }
-      } as Stripe.Checkout.SessionCreateParams.LineItem;
-    });
+    const lineItems = quote.lineItems.map(buildStripeLineItem);
 
     if (quote.shippingMinor > 0) {
       lineItems.push({
@@ -425,7 +462,7 @@ app.post("/api/cart/checkout", async (req, res) => {
 
 app.post("/api/cart/:cartId/checkout", async (req, res) => {
   if (!stripe) {
-    return res.status(500).json({ error: "Stripe is not configured" });
+    return res.status(500).json({ error: stripeConfigError });
   }
 
   const cartId = req.params.cartId;
@@ -447,30 +484,7 @@ app.post("/api/cart/:cartId/checkout", async (req, res) => {
       }))
     );
 
-    const lineItems = quote.lineItems.map((item) => {
-      const product = findProductById(item.productId);
-      if (!product) {
-        throw new Error(`Unknown product ${item.productId}`);
-      }
-      const imageUrl = new URL(product.image, siteUrl).toString();
-
-      return {
-        quantity: item.qty,
-        price_data: {
-          currency: checkoutCurrency,
-          unit_amount: item.unitPriceMinor,
-          product_data: {
-            name: item.name,
-            description: product.description,
-            images: [imageUrl],
-            metadata: {
-              productId: product.id,
-              size: item.size
-            }
-          }
-        }
-      } as Stripe.Checkout.SessionCreateParams.LineItem;
-    });
+    const lineItems = quote.lineItems.map(buildStripeLineItem);
 
     if (quote.shippingMinor > 0) {
       lineItems.push({

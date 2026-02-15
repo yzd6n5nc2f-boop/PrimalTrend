@@ -23,12 +23,16 @@ export default async function CollectionPage({
 
   return (
     <div>
-      <div className="relative h-[32rem] w-full overflow-hidden md:h-[44rem] lg:h-[52rem]">
+      <div className="relative h-[32rem] w-full overflow-hidden bg-[#0B0B0D] md:h-[44rem] lg:h-[52rem]">
         <Image
           src={tribe.image}
           alt={tribe.name}
           fill
-          className="object-cover object-[50%_10%] brightness-110 saturate-110"
+          style={{
+            objectPosition: tribe.heroPosition,
+            transform: `scale(${tribe.heroScale})`
+          }}
+          className="object-cover brightness-110 saturate-110"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-4 md:px-6">
