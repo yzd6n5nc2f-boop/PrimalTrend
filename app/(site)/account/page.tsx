@@ -12,7 +12,7 @@ export default function AccountPage() {
     <Toast.Provider>
       <div className="section-spacing">
         <div className="mx-auto grid max-w-[1280px] gap-8 px-4 md:grid-cols-2 md:px-6">
-          <div className="rounded-[20px] border border-[#1F2430] bg-[#0B0D10]/70 p-6">
+          <div className="rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]/70 p-6">
             <h1 className="font-display text-2xl uppercase">Sign in</h1>
             <div className="mt-4 space-y-3">
               <Input placeholder="Email" type="email" />
@@ -20,7 +20,7 @@ export default function AccountPage() {
               <Button onClick={() => setOpen(true)}>Sign in</Button>
             </div>
           </div>
-          <div className="rounded-[20px] border border-[#1F2430] bg-[#0B0D10]/70 p-6">
+          <div className="rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]/70 p-6">
             <h2 className="font-display text-2xl uppercase">Register</h2>
             <div className="mt-4 space-y-3">
               <Input placeholder="Name" />
@@ -36,7 +36,7 @@ export default function AccountPage() {
       <Toast.Root
         open={open}
         onOpenChange={setOpen}
-        className="fixed bottom-6 right-6 rounded-[14px] border border-[#1F2430] bg-[#0B0D10] px-4 py-3 text-sm text-white"
+        className="fixed bottom-6 right-6 rounded-[14px] border border-[#5B5F68] bg-[#1A1B1F] px-4 py-3 text-sm text-white"
       >
         Success. Mock authentication complete.
       </Toast.Root>

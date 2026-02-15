@@ -32,7 +32,7 @@ export default async function CollectionPage({
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-4 md:px-6">
-          <p className="text-[12px] uppercase tracking-[0.22em] text-[#7D8696]">
+          <p className="text-[12px] uppercase tracking-[0.22em] text-[#5B5F68]">
             Armory
           </p>
           <h1 className="font-display text-[32px] md:text-[44px]">
@@ -46,7 +46,7 @@ export default async function CollectionPage({
           <p className="text-sm text-white/60">{tribe.description}</p>
           <ul className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-white/60">
             {tribe.traits.map((trait) => (
-              <li key={trait} className="rounded-full border border-[#1F2430] px-3 py-2">
+              <li key={trait} className="rounded-full border border-[#5B5F68] px-3 py-2">
                 {trait}
               </li>
             ))}

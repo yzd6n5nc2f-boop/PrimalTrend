@@ -17,7 +17,7 @@ export default function JournalPage() {
           {journalPosts.map((post) => (
             <div
               key={post.slug}
-              className="rounded-[20px] border border-[#1F2430] bg-[#0B0D10]/70"
+              className="rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]/70"
             >
               <div className="relative h-[180px] overflow-hidden rounded-t-[20px]">
                 <Image

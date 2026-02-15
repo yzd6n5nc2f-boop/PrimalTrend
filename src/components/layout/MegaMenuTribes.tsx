@@ -10,16 +10,16 @@ export function MegaMenuTribes() {
     <NavigationMenu.Root className="relative">
       <NavigationMenu.List>
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-white/80 transition hover:text-white focus-ring">
+          <NavigationMenu.Trigger className="flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-white/80 transition hover:text-[#D7B56D] focus-ring">
             Armory
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="absolute left-0 top-full w-screen max-w-[1280px] px-4 md:px-6">
-            <div className="mt-4 grid gap-4 rounded-[20px] border border-[#1F2430] bg-[#0B0D10]/95 p-6 text-sm text-white shadow-[0_12px_40px_rgba(0,0,0,0.4)] backdrop-blur-md md:grid-cols-3">
+            <div className="mt-4 grid gap-4 rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]/95 p-6 text-sm text-white shadow-[0_12px_40px_rgba(0,0,0,0.4)] backdrop-blur-md md:grid-cols-3">
               {tribes.map((tribe) => (
                 <Link
                   key={tribe.slug}
                   href={`/collections/${tribe.slug}`}
-                  className="group flex items-center gap-4 rounded-[16px] border border-[#1F2430] bg-[#0F1216] p-3 transition duration-150 ease-primal hover:border-[rgba(120,160,255,0.35)]"
+                  className="group flex items-center gap-4 rounded-[16px] border border-[#5B5F68] bg-[#1A1B1F] p-3 transition duration-150 ease-primal hover:border-[#D7B56D]/70"
                 >
                   <Image
                     src={tribe.image}

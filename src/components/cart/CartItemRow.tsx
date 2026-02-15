@@ -9,8 +9,8 @@ export function CartItemRow({ item }: { item: CartItem }) {
   const removeItem = useCartStore((state) => state.removeItem);
 
   return (
-    <div className="flex flex-wrap items-center gap-6 border-b border-[#1F2430] py-6">
-      <div className="relative h-28 w-28 overflow-hidden rounded-[16px] border border-[#1F2430]">
+    <div className="flex flex-wrap items-center gap-6 border-b border-[#5B5F68] py-6">
+      <div className="relative h-28 w-28 overflow-hidden rounded-[16px] border border-[#5B5F68]">
         <Image src={item.image} alt={item.name} fill className="object-cover" />
       </div>
       <div className="flex-1">
@@ -21,7 +21,7 @@ export function CartItemRow({ item }: { item: CartItem }) {
       </div>
       <div className="flex items-center gap-3">
         <button
-          className="h-8 w-8 rounded-full border border-[#1F2430]"
+          className="h-8 w-8 rounded-full border border-[#5B5F68]"
           onClick={() => setQty(item.productId, item.size, Math.max(1, item.qty - 1))}
           aria-label="Decrease quantity"
         >
@@ -29,7 +29,7 @@ export function CartItemRow({ item }: { item: CartItem }) {
         </button>
         <span className="text-sm text-white/70">{item.qty}</span>
         <button
-          className="h-8 w-8 rounded-full border border-[#1F2430]"
+          className="h-8 w-8 rounded-full border border-[#5B5F68]"
           onClick={() => setQty(item.productId, item.size, item.qty + 1)}
           aria-label="Increase quantity"
         >

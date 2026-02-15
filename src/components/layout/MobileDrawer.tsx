@@ -3,6 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Accordion from "@radix-ui/react-accordion";
 import Link from "next/link";
+import Image from "next/image";
 import { X } from "lucide-react";
 import { useUiStore } from "@/store/uiStore";
 
@@ -14,24 +15,33 @@ export function MobileDrawer() {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70" />
-        <Dialog.Content className="fixed left-0 top-0 z-50 h-full w-[320px] bg-[#050608] p-6 text-white shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
-          <div className="flex items-center justify-between">
-            <p className="font-display text-lg uppercase tracking-[0.3em]">
-              PRIMAL TREND
-            </p>
+        <Dialog.Content className="fixed left-0 top-0 z-50 h-full w-[320px] bg-[#0B0B0D] p-6 text-white shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+          <div className="flex items-center justify-between gap-3">
+            <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+              <Image
+                src="/images/brand/logo-mark.png"
+                alt="Primal Trend"
+                width={32}
+                height={32}
+                className="h-7 w-7 mix-blend-screen opacity-95"
+              />
+              <span className="font-display text-[24px] uppercase leading-none tracking-[0.08em]">
+                Primal Trend
+              </span>
+            </Link>
             <Dialog.Close asChild>
               <button
-                className="rounded-full border border-[#1F2430] p-2"
+                className="rounded-full border border-[#5B5F68] p-2"
                 aria-label="Close menu"
               >
                 <X size={18} />
               </button>
             </Dialog.Close>
           </div>
-          <nav className="mt-8 space-y-4 text-sm uppercase tracking-[0.2em]">
+          <nav className="mt-8 space-y-4 text-sm uppercase tracking-[0.2em] text-white/85">
             <Accordion.Root type="multiple" className="space-y-4">
-              <Accordion.Item value="shop" className="border-b border-[#1F2430]">
-                <Accordion.Trigger className="w-full py-3 text-left">
+              <Accordion.Item value="shop" className="border-b border-[#5B5F68]">
+                <Accordion.Trigger className="w-full py-3 text-left transition hover:text-[#D7B56D]">
                   Shop
                 </Accordion.Trigger>
                 <Accordion.Content className="pb-4 text-xs text-white/70">
@@ -48,8 +58,8 @@ export function MobileDrawer() {
                   </div>
                 </Accordion.Content>
               </Accordion.Item>
-              <Accordion.Item value="armory" className="border-b border-[#1F2430]">
-                <Accordion.Trigger className="w-full py-3 text-left">
+              <Accordion.Item value="armory" className="border-b border-[#5B5F68]">
+                <Accordion.Trigger className="w-full py-3 text-left transition hover:text-[#D7B56D]">
                   Armory
                 </Accordion.Trigger>
                 <Accordion.Content className="pb-4 text-xs text-white/70">

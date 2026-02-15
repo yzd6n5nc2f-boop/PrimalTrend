@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
       href={`/product/${product.slug}`}
       className="group flex flex-col gap-3"
     >
-      <div className="relative h-[260px] overflow-hidden rounded-[20px] border border-[#1F2430] bg-[#0B0D10]">
+      <div className="relative h-[260px] overflow-hidden rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]">
         <Image
           src={product.image}
           alt={product.name}

@@ -22,13 +22,13 @@ export function SortMenu({
     <Popover.Root>
       <Popover.Trigger
         className={cn(
-          "flex items-center gap-2 rounded-[14px] border border-[#1F2430] bg-[#0B0D10] px-4 py-2 text-xs uppercase tracking-[0.18em] text-white/70"
+          "flex items-center gap-2 rounded-[14px] border border-[#5B5F68] bg-[#1A1B1F] px-4 py-2 text-xs uppercase tracking-[0.18em] text-white/70"
         )}
       >
         Sort
         <ChevronDown size={14} />
       </Popover.Trigger>
-      <Popover.Content className="z-40 mt-2 w-56 rounded-[14px] border border-[#1F2430] bg-[#0B0D10] p-2 text-sm text-white">
+      <Popover.Content className="z-40 mt-2 w-56 rounded-[14px] border border-[#5B5F68] bg-[#1A1B1F] p-2 text-sm text-white">
         {options.map((option) => (
           <button
             key={option.value}

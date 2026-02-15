@@ -13,7 +13,7 @@ export function LifestyleGrid() {
         {lifestyle.map((item) => (
           <div
             key={item.title}
-            className="group relative h-[220px] overflow-hidden rounded-[20px] border border-[#1F2430]"
+            className="group relative h-[220px] overflow-hidden rounded-[20px] border border-[#5B5F68]"
           >
             <Image
               src={item.image}

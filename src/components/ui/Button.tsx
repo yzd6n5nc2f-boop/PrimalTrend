@@ -6,10 +6,10 @@ const baseStyles =
 
 const variants = {
   primary:
-    "border border-white/15 bg-white text-black shadow-[0_10px_30px_rgba(255,255,255,0.08)] hover:border-white/30 hover:bg-[#E7E7E7] hover:shadow-[0_12px_34px_rgba(255,255,255,0.12)]",
+    "border border-[#D7B56D]/70 bg-[#D7B56D] text-black shadow-[0_10px_30px_rgba(215,181,109,0.24)] hover:border-[#D7B56D] hover:bg-[#E2C588] hover:shadow-[0_12px_34px_rgba(215,181,109,0.34)]",
   secondary:
-    "border border-white/40 text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:border-white/70 hover:shadow-[0_10px_28px_rgba(0,0,0,0.45)]",
-  ghost: "border border-[#1F2430] text-white hover:border-white/70"
+    "border border-[#D7B56D]/70 text-[#D7B56D] shadow-[0_8px_24px_rgba(0,0,0,0.35)] hover:border-[#D7B56D] hover:bg-[#D7B56D]/10 hover:shadow-[0_10px_28px_rgba(0,0,0,0.45)]",
+  ghost: "border border-[#5B5F68] text-white hover:border-[#D7B56D] hover:text-[#D7B56D]"
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

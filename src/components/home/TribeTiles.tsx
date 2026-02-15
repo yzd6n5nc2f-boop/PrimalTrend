@@ -31,7 +31,7 @@ export function TribeTiles() {
           <Link
             key={tile.title}
             href={tile.href}
-            className="group relative h-[240px] overflow-hidden rounded-[20px] border border-[#1F2430]"
+            className="group relative h-[240px] overflow-hidden rounded-[20px] border border-[#5B5F68]"
           >
             <Image
               src={tile.image}

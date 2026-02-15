@@ -119,7 +119,7 @@ function FilterGroup({
                 "rounded-full border px-3 py-2 text-[11px] uppercase tracking-[0.18em] " +
                 (active
                   ? "border-white/70 bg-white/10 text-white"
-                  : "border-[#1F2430] text-white/60")
+                  : "border-[#5B5F68] text-white/60")
               }
             >
               {item}

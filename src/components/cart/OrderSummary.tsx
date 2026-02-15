@@ -136,7 +136,7 @@ export function OrderSummary() {
   };
 
   return (
-    <div className="rounded-[20px] border border-[#1F2430] bg-[#0B0D10]/70 p-6">
+    <div className="rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]/70 p-6">
       <p className="text-xs uppercase tracking-[0.2em] text-white/60">
         Order Summary
       </p>

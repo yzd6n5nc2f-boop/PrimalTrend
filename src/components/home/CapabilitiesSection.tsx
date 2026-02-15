@@ -23,7 +23,7 @@ export function CapabilitiesSection() {
   return (
     <section className="section-spacing noise-bg">
       <div className="mx-auto max-w-[1280px] px-4 md:px-6">
-        <p className="text-[12px] uppercase tracking-[0.22em] text-[#7D8696]">
+        <p className="text-[12px] uppercase tracking-[0.22em] text-[#D7B56D]">
           — Capabilities
         </p>
         <h2 className="mt-4 font-display text-[32px] text-white/90 md:text-[44px]">
@@ -33,7 +33,7 @@ export function CapabilitiesSection() {
           {cards.map((card) => (
             <Card key={card.title}>
               <h3 className="font-display text-xl uppercase">{card.title}</h3>
-              <p className="mt-3 text-sm text-[#A6AEBB]">{card.copy}</p>
+              <p className="mt-3 text-sm text-white/72">{card.copy}</p>
             </Card>
           ))}
         </div>

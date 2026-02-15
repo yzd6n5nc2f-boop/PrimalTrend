@@ -8,7 +8,7 @@ export function ProductGallery({ images }: { images: string[] }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative h-[420px] overflow-hidden rounded-[20px] border border-[#1F2430]">
+      <div className="relative h-[420px] overflow-hidden rounded-[20px] border border-[#5B5F68]">
         <Image
           src={active}
           alt="Product image"
@@ -25,7 +25,7 @@ export function ProductGallery({ images }: { images: string[] }) {
               "relative h-20 w-20 overflow-hidden rounded-[14px] border " +
               (image === active
                 ? "border-white/70"
-                : "border-[#1F2430]")
+                : "border-[#5B5F68]")
             }
             aria-label="Select product image"
           >

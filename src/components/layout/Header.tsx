@@ -35,29 +35,31 @@ export function Header() {
       className={cn(
         "fixed left-0 top-0 z-50 w-full transition duration-150 ease-primal",
         scrolled
-          ? "border-b border-[#1F2430] bg-[#050608]/90 backdrop-blur-md"
+          ? "border-b border-[#5B5F68] bg-[#0B0B0D]/90 shadow-[0_14px_40px_rgba(0,0,0,0.45)] backdrop-blur-md"
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex h-[64px] max-w-[1280px] items-center justify-between px-4 md:h-[72px] md:px-6">
-        <nav className="hidden items-center gap-6 text-sm uppercase tracking-[0.18em] text-white/80 md:flex">
-          <MegaMenuShop />
-          <MegaMenuTribes />
-          <Link className="transition hover:text-white" href="/journal">
-            Journal
-          </Link>
-        </nav>
-        <Link href="/" className="flex items-center justify-center">
+      <div className="mx-auto grid h-[64px] max-w-[1280px] grid-cols-[1fr_auto] items-center gap-4 px-4 md:h-[72px] md:grid-cols-[auto_1fr_auto] md:px-6">
+        <Link href="/" className="flex w-max items-center gap-3">
           <Image
             src="/images/brand/logo-mark.png"
             alt="Primal Trend"
-            width={36}
-            height={36}
-            className="h-8 w-8 mix-blend-screen opacity-90 md:h-9 md:w-9"
+            width={40}
+            height={40}
+            className="h-8 w-8 mix-blend-screen opacity-95 md:h-10 md:w-10"
             priority
           />
-          <span className="sr-only">Primal Trend</span>
+          <span className="whitespace-nowrap font-display text-[20px] uppercase leading-[0.88] tracking-[0.08em] text-white md:text-[36px]">
+            Primal Trend
+          </span>
         </Link>
+        <nav className="hidden items-center justify-center gap-6 text-[11px] uppercase tracking-[0.22em] text-white/80 md:flex">
+          <MegaMenuShop />
+          <MegaMenuTribes />
+          <Link className="transition hover:text-[#D7B56D]" href="/journal">
+            Journal
+          </Link>
+        </nav>
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2 md:flex">
             <Link href="/search" aria-label="Search" className="focus-ring">
@@ -75,7 +77,7 @@ export function Header() {
                 <ShoppingBag size={18} />
               </IconButton>
               {count > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-black">
+                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D7B56D] text-[10px] font-bold text-black">
                   {count}
                 </span>
               )}
@@ -87,13 +89,13 @@ export function Header() {
                 <ShoppingBag size={18} />
               </IconButton>
               {count > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-black">
+                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D7B56D] text-[10px] font-bold text-black">
                   {count}
                 </span>
               )}
             </Link>
             <button
-              className="flex items-center gap-2 text-sm uppercase tracking-[0.2em]"
+              className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-white/80 transition hover:text-[#D7B56D]"
               onClick={() => setMobileNavOpen(true)}
               aria-label="Open menu"
             >

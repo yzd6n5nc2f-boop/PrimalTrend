@@ -1,13 +1,17 @@
 import "../globals.css";
 import { ReactNode } from "react";
-import { Inter, Oswald } from "next/font/google";
+import { Bebas_Neue, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { Footer } from "@/components/layout/Footer";
 import { siteMetadata } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bebas-neue"
+});
 
 export const metadata = {
   title: {
@@ -26,8 +30,8 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${oswald.variable}`}>
-      <body className="bg-[#050608] text-white">
+    <html lang="en" className={`${inter.variable} ${bebasNeue.variable}`}>
+      <body className="bg-primal-bg text-white antialiased">
         <Header />
         <MobileDrawer />
         <main className="pt-[64px] md:pt-[72px]">{children}</main>

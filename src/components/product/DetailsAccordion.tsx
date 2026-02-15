@@ -28,7 +28,7 @@ export function DetailsAccordion() {
         <Accordion.Item
           key={item.title}
           value={item.title}
-          className="rounded-[14px] border border-[#1F2430] px-4"
+          className="rounded-[14px] border border-[#5B5F68] px-4"
         >
           <Accordion.Trigger className="w-full py-4 text-left text-xs uppercase tracking-[0.2em] text-white/70">
             {item.title}

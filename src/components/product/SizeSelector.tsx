@@ -17,7 +17,7 @@ export function SizeSelector({
             "rounded-full border px-4 py-2 text-xs uppercase tracking-[0.18em] " +
             (value === size
               ? "border-white/70 bg-white/10 text-white"
-              : "border-[#1F2430] text-white/70")
+              : "border-[#5B5F68] text-white/70")
           }
         >
           {size}

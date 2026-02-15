@@ -12,14 +12,14 @@ export default async function ShopPage() {
   return (
     <div className="section-spacing">
       <div className="mx-auto max-w-[1280px] px-4 md:px-6">
-        <div className="rounded-[20px] border border-[#1F2430] bg-[#0B0D10]/80 p-10">
-          <p className="text-[12px] uppercase tracking-[0.22em] text-[#7D8696]">
+        <div className="rounded-[20px] border border-[#5B5F68] bg-[#1A1B1F]/80 p-10">
+          <p className="text-[12px] uppercase tracking-[0.22em] text-[#D7B56D]">
             Black Core
           </p>
           <h1 className="mt-4 font-display text-[32px] md:text-[44px]">
             Black Core
           </h1>
-          <p className="mt-2 text-sm text-[#B8BDC7]">
+          <p className="mt-2 text-sm text-white/72">
             Monochrome layers designed for relentless sessions.
           </p>
         </div>
@@ -42,7 +42,7 @@ export default async function ShopPage() {
             <Link
               key={item.label}
               href={item.href}
-              className="group relative h-[240px] overflow-hidden rounded-[20px] border border-[#1F2430]"
+              className="group relative h-[240px] overflow-hidden rounded-[20px] border border-[#5B5F68]"
             >
               <Image
                 src={item.image}

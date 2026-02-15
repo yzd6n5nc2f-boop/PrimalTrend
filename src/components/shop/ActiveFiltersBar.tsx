@@ -27,7 +27,7 @@ export function ActiveFiltersBar({
       {chips.map((chip) => (
         <span
           key={chip}
-          className="rounded-full border border-[#1F2430] px-3 py-2"
+          className="rounded-full border border-[#5B5F68] px-3 py-2"
         >
           {chip}
         </span>
