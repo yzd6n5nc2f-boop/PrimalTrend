@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - master
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+      - master
 
 jobs:
   build_and_deploy_job:
@@ -34,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build app
-        run: pnpm run build && pnpm run export
+        run: NEXT_OUTPUT_EXPORT=true pnpm run build
       - name: Verify build output
         run: |
           ls -la out

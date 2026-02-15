@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useCartStore } from "@/store/cartStore";
 import { useHasHydrated } from "@/store/useHasHydrated";
@@ -8,7 +8,7 @@ import { CartItemRow } from "@/components/cart/CartItemRow";
 import { OrderSummary } from "@/components/cart/OrderSummary";
 import { EmptyCart } from "@/components/cart/EmptyCart";
 
-export default function CartPage() {
+function CartPageContent() {
   const hydrated = useHasHydrated();
   const items = useCartStore((state) => state.items);
   const clearCart = useCartStore((state) => state.clearCart);
@@ -53,5 +53,13 @@ export default function CartPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function CartPage() {
+  return (
+    <Suspense fallback={null}>
+      <CartPageContent />
+    </Suspense>
   );
 }
